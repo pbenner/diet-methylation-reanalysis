@@ -1,0 +1,3 @@
+time,observed_count,shuffled_median,shuffled_q025,shuffled_q975,shuffles_ge_observed,permutations,count_p_upper,count_p_mc_se_approx
+before,158,200.0,147.0,437.0,9334,9999,0.9335,0.0024916652743865817
+after,176,203.0,150.95000000000002,438.1499999999978,8072,9999,0.8073,0.003944391819112583

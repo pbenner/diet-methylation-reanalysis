@@ -1,0 +1,21 @@
+{
+  "statistic": "C_after - C_before, with the same participant assignment at both visits",
+  "red_site_rule": "limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
+  "tail": "upper: shuffled change >= observed change, including ties",
+  "p_formula": "(1 + shuffles_ge_observed) / (B + 1)",
+  "question": "Is the observed increase in red-site count unusually large under the shuffle scheme?",
+  "group_field": "diet_code",
+  "seed": 70899,
+  "permutations": 9999,
+  "permutation_unit": "participant; one assignment shared by both visits and every CpG",
+  "variance_prior": "re-estimated across all sites for each permutation",
+  "source": "existing paired rows of permutation_null_counts.csv; no new shuffles needed",
+  "limitations": [
+    "Unrestricted exchangeability diagnostic; original trial block membership is unavailable.",
+    "Deposited diet labels conflict and the exact author model is not verified.",
+    "Each shuffle uses its own baseline count; the test is not conditional on a baseline count of 158.",
+    "This is a change in thresholded-site counts, not a per-CpG diet-by-time interaction test.",
+    "The statistic and upper-tail direction were chosen during exploratory review of the results.",
+    "The p-value is not the probability that the null hypothesis is true or that there is no diet effect."
+  ]
+}

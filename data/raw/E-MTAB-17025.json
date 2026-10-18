@@ -1,0 +1,3970 @@
+{
+  "accno" : "E-MTAB-17025",
+  "attributes" : [ {
+    "name" : "Title",
+    "value" : "A vegan diet epigenetically modulates inflammatory pathways and biological aging: Genome-wide DNA methylation analysis of a one-month isocaloric vegan versus meat-rich dietary intervention"
+  }, {
+    "name" : "DOI",
+    "value" : "10.6019/E-MTAB-17025"
+  }, {
+    "name" : "ReleaseDate",
+    "value" : "2026-07-21"
+  }, {
+    "name" : "RootPath",
+    "value" : "E-MTAB-17025"
+  }, {
+    "name" : "AttachTo",
+    "value" : "ArrayExpress"
+  } ],
+  "section" : {
+    "accno" : "s-E-MTAB-17025",
+    "type" : "Study",
+    "attributes" : [ {
+      "name" : "Title",
+      "value" : "A vegan diet epigenetically modulates inflammatory pathways and biological aging: Genome-wide DNA methylation analysis of a one-month isocaloric vegan versus meat-rich dietary intervention"
+    }, {
+      "name" : "ReleaseDate",
+      "value" : "2026-07-21"
+    }, {
+      "name" : "Study type",
+      "value" : "methylation profiling by array",
+      "valqual" : [ {
+        "name" : "Ontology",
+        "value" : "EFO"
+      }, {
+        "name" : "TermId",
+        "value" : "EFO_0002759"
+      } ]
+    }, {
+      "name" : "Organism",
+      "value" : "Homo sapiens"
+    }, {
+      "name" : "Description",
+      "value" : "We investigated the impact of a vegan and meat-rich diet on the underlying epigenetic modfications of DNA methylation signatures in the blood of human study participants. Therefore, we analyzed genome-wide DNA methylation from two human cohorts at baseline and following an one-month dietary intervention. The resulting data enabled us to evaluate the impact of both dietary strategies on epigenetic regulation and compare them to each other. We aimed to identify diet-associated shifts relevant to biological processes and potential effects on health outcomes."
+    } ],
+    "subsections" : [ [ {
+      "accno" : "P-MTAB-165551",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-MTAB-165551"
+      }, {
+        "name" : "Type",
+        "value" : "sample collection protocol",
+        "valqual" : [ {
+          "name" : "Ontology",
+          "value" : "EFO"
+        }, {
+          "name" : "TermId",
+          "value" : "EFO_0005518"
+        } ]
+      }, {
+        "name" : "Description",
+        "value" : "Blood from each participant was collected and aliquoted in six separate 1.5-mL cryovials and stored at −20°C until measurement or transportation to external laboratories."
+      } ]
+    }, {
+      "accno" : "P-MTAB-165552",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-MTAB-165552"
+      }, {
+        "name" : "Type",
+        "value" : "nucleic acid extraction protocol",
+        "valqual" : [ {
+          "name" : "Ontology",
+          "value" : "EFO"
+        }, {
+          "name" : "TermId",
+          "value" : "EFO_0002944"
+        } ]
+      }, {
+        "name" : "Description",
+        "value" : "DNA was extracted from whole blood using a salting-out procedure as described by Miller et al. (1998). Erythrocytes were lysed using a hypotonic lysis buffer and leukocytes were isolated by centrifugation. Nuclei of leukocytes were subsequently lysed using SDS and Proteinase K to release genomic DNA. DNA was isolated by increasing the salt concentration and subsequent centrifugation. The resulting supernatant containing DNA was precipitated using isopropanol."
+      } ]
+    }, {
+      "accno" : "P-MTAB-165553",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-MTAB-165553"
+      }, {
+        "name" : "Type",
+        "value" : "nucleic acid labeling protocol",
+        "valqual" : [ {
+          "name" : "Ontology",
+          "value" : "EFO"
+        }, {
+          "name" : "TermId",
+          "value" : "EFO_0003813"
+        } ]
+      }, {
+        "name" : "Description",
+        "value" : "Cryovials for serum were labeled without information about group. External laboratories did not receive information concerning patient randomization. A numeric code was used for anonymization. Samples could only be linked to a participant using a master list available only to the head of the study."
+      } ]
+    }, {
+      "accno" : "P-MTAB-165554",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-MTAB-165554"
+      }, {
+        "name" : "Type",
+        "value" : "nucleic acid hybridization to array protocol",
+        "valqual" : [ {
+          "name" : "Ontology",
+          "value" : "EFO"
+        }, {
+          "name" : "TermId",
+          "value" : "EFO_0003815"
+        } ]
+      }, {
+        "name" : "Description",
+        "value" : "DNA methylation was determined from DNA samples using the Illumina Human Methylation Epic Beadchip and was carried out by the Human Genomics Facility of the Genetic Department of Internal Medicine at Erasmus MC, Rotterdam, NL."
+      } ]
+    }, {
+      "accno" : "P-MTAB-165555",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-MTAB-165555"
+      }, {
+        "name" : "Type",
+        "value" : "array scanning and feature extraction protocol",
+        "valqual" : [ {
+          "name" : "Ontology",
+          "value" : "EFO"
+        }, {
+          "name" : "TermId",
+          "value" : "EFO_0003814"
+        } ]
+      }, {
+        "name" : "Description",
+        "value" : "Readout of the Illumina EPIC array was performed by the Human Genomics Facility of the Genetic Department of Internal Medicine at Erasmus MC, Rotterdam, NL.  Feature extraction from “.idat” files was done in R (version 4.2.3) using the “minfi” package (version 1.44.0) and the corresponding Illumina Manifest files from the R-libraries “IlluminaHumanMethylationEPICmanifest” & “IlluminaHumanMethylationEPICanno.ilm10b4.hg19”.  Poor quality samples were assessed using minfi’s detection p-value function, but all 96 samples passed the threshold of 0.05. Subsequently, poor quality probes, probes associated with sex chromosomes, and probes associated with common SNPs were removed. For all remaining files beta- and M-values were calculated."
+      } ]
+    }, {
+      "accno" : "P-MTAB-165556",
+      "type" : "Protocols",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "P-MTAB-165556"
+      }, {
+        "name" : "Type",
+        "value" : "normalization data transformation protocol",
+        "valqual" : [ {
+          "name" : "Ontology",
+          "value" : "EFO"
+        }, {
+          "name" : "TermId",
+          "value" : "EFO_0003816"
+        } ]
+      }, {
+        "name" : "Description",
+        "value" : "Methylation data was preprocessed into a MethylSet object and normalized using either functional normalization preprocessFunnorm() with NOOB background correction and dye normalization enabled or preprocessQuantile()"
+      } ]
+    } ], {
+      "type" : "Author",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "Lukas Karbacher"
+      }, {
+        "name" : "Email",
+        "value" : "lkarbacher@salk.edu"
+      }, {
+        "name" : "Role",
+        "value" : "submitter"
+      }, {
+        "name" : "affiliation",
+        "value" : "o2",
+        "reference" : true
+      }, {
+        "name" : "affiliation",
+        "value" : "o3",
+        "reference" : true
+      } ]
+    }, {
+      "accno" : "o1",
+      "type" : "Organization",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "University of California, San Diego The Salk Institute for Biological Studies"
+      }, {
+        "name" : "Address",
+        "value" : "2880 Torrey Pines Scenic Dr. La Jolla, CA 92037"
+      } ]
+    }, {
+      "accno" : "s-samples-factors-E-MTAB-17025",
+      "type" : "Samples",
+      "attributes" : [ {
+        "name" : "Sample count",
+        "value" : "96"
+      }, {
+        "name" : "Experimental Designs",
+        "value" : "time series design",
+        "valqual" : [ {
+          "name" : "Ontology",
+          "value" : "EFO"
+        }, {
+          "name" : "TermId",
+          "value" : "EFO:0001779"
+        } ]
+      }, {
+        "name" : "Experimental Designs",
+        "value" : "case control design",
+        "valqual" : [ {
+          "name" : "Ontology",
+          "value" : "EFO"
+        }, {
+          "name" : "TermId",
+          "value" : "EFO:0001427"
+        } ]
+      }, {
+        "name" : "Experimental Factors",
+        "value" : "disease",
+        "valqual" : [ {
+          "name" : "TermName",
+          "value" : "disease"
+        } ]
+      }, {
+        "name" : "Experimental Factors",
+        "value" : "time",
+        "valqual" : [ {
+          "name" : "TermName",
+          "value" : "time"
+        } ]
+      } ],
+      "subsections" : [ {
+        "accno" : "exp_factor-E-MTAB-17025",
+        "type" : "Experimental Factors",
+        "attributes" : [ {
+          "name" : "Disease",
+          "value" : "Vegan Diet"
+        }, {
+          "name" : "Disease",
+          "value" : "Meat-rich Diet"
+        }, {
+          "name" : "Time",
+          "value" : "0 month"
+        }, {
+          "name" : "Time",
+          "value" : "1 month"
+        } ],
+        "subsections" : [ [ {
+          "accno" : "factors_0",
+          "type" : "Factors Table",
+          "attributes" : [ {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "time",
+            "value" : "0 month"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "22",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R01C01_Grn.idat\" OR \"204792770116_R01C01_Red.idat\" OR \"204792170105_R02C01_Grn.idat\" OR \"204792170105_R02C01_Red.idat\" OR \"204792770030_R02C01_Grn.idat\" OR \"204792770030_R02C01_Red.idat\" OR \"204792200112_R03C01_Grn.idat\" OR \"204792200112_R03C01_Red.idat\" OR \"204792170107_R01C01_Red.idat\" OR \"204792170107_R01C01_Grn.idat\" OR \"204792170061_R03C01_Red.idat\" OR \"204792170061_R03C01_Grn.idat\" OR \"204792170105_R03C01_Red.idat\" OR \"204792170105_R03C01_Grn.idat\" OR \"204792770030_R03C01_Grn.idat\" OR \"204792770030_R03C01_Red.idat\" OR \"204792200112_R04C01_Red.idat\" OR \"204792200112_R04C01_Grn.idat\" OR \"204792170061_R04C01_Red.idat\" OR \"204792170061_R04C01_Grn.idat\" OR \"204792170105_R04C01_Grn.idat\" OR \"204792170105_R04C01_Red.idat\" OR \"204792770030_R04C01_Grn.idat\" OR \"204792770030_R04C01_Red.idat\" OR \"204792770116_R05C01_Grn.idat\" OR \"204792770116_R05C01_Red.idat\" OR \"204792170107_R05C01_Grn.idat\" OR \"204792170107_R05C01_Red.idat\" OR \"204792200112_R05C01_Red.idat\" OR \"204792200112_R05C01_Grn.idat\" OR \"204792170061_R05C01_Grn.idat\" OR \"204792170061_R05C01_Red.idat\" OR \"204792170105_R06C01_Red.idat\" OR \"204792170105_R06C01_Grn.idat\" OR \"204792770030_R06C01_Red.idat\" OR \"204792770030_R06C01_Grn.idat\" OR \"204792770116_R07C01_Red.idat\" OR \"204792770116_R07C01_Grn.idat\" OR \"204792170107_R07C01_Red.idat\" OR \"204792170107_R07C01_Grn.idat\" OR \"204792200112_R08C01_Red.idat\" OR \"204792200112_R08C01_Grn.idat\" OR \"204792170061_R08C01_Red.idat\" OR \"204792170061_R08C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "factors_1",
+          "type" : "Factors Table",
+          "attributes" : [ {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "time",
+            "value" : "0 month"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "26",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R01C01_Red.idat\" OR \"204792780062_R01C01_Grn.idat\" OR \"204792770030_R01C01_Red.idat\" OR \"204792770030_R01C01_Grn.idat\" OR \"204792770116_R02C01_Grn.idat\" OR \"204792770116_R02C01_Red.idat\" OR \"204792170107_R02C01_Grn.idat\" OR \"204792170107_R02C01_Red.idat\" OR \"204792200112_R02C01_Grn.idat\" OR \"204792200112_R02C01_Red.idat\" OR \"204792170061_R02C01_Grn.idat\" OR \"204792170061_R02C01_Red.idat\" OR \"204792770116_R03C01_Grn.idat\" OR \"204792770116_R03C01_Red.idat\" OR \"204792170107_R03C01_Red.idat\" OR \"204792170107_R03C01_Grn.idat\" OR \"204792770116_R04C01_Grn.idat\" OR \"204792770116_R04C01_Red.idat\" OR \"204792170107_R04C01_Grn.idat\" OR \"204792170107_R04C01_Red.idat\" OR \"204792170106_R01C01_Grn.idat\" OR \"204792170106_R01C01_Red.idat\" OR \"204792170105_R05C01_Red.idat\" OR \"204792170105_R05C01_Grn.idat\" OR \"204792770030_R05C01_Grn.idat\" OR \"204792770030_R05C01_Red.idat\" OR \"204792770116_R06C01_Red.idat\" OR \"204792770116_R06C01_Grn.idat\" OR \"204792170107_R06C01_Red.idat\" OR \"204792170107_R06C01_Grn.idat\" OR \"204792200112_R06C01_Red.idat\" OR \"204792200112_R06C01_Grn.idat\" OR \"204792170061_R06C01_Red.idat\" OR \"204792170061_R06C01_Grn.idat\" OR \"204792170061_R01C01_Red.idat\" OR \"204792170061_R01C01_Grn.idat\" OR \"204792200112_R07C01_Grn.idat\" OR \"204792200112_R07C01_Red.idat\" OR \"204792170061_R07C01_Grn.idat\" OR \"204792170061_R07C01_Red.idat\" OR \"204792170105_R07C01_Red.idat\" OR \"204792170105_R07C01_Grn.idat\" OR \"204792770030_R07C01_Red.idat\" OR \"204792770030_R07C01_Grn.idat\" OR \"204792770116_R08C01_Grn.idat\" OR \"204792770116_R08C01_Red.idat\" OR \"204792170107_R08C01_Grn.idat\" OR \"204792170107_R08C01_Red.idat\" OR \"204792170105_R08C01_Red.idat\" OR \"204792170105_R08C01_Grn.idat\" OR \"204792770030_R08C01_Grn.idat\" OR \"204792770030_R08C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "factors_2",
+          "type" : "Factors Table",
+          "attributes" : [ {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "time",
+            "value" : "1 month"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "26",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770131_R01C01_Grn.idat\" OR \"204792770131_R01C01_Red.idat\" OR \"204792780069_R02C01_Red.idat\" OR \"204792780069_R02C01_Grn.idat\" OR \"204792210076_R02C01_Grn.idat\" OR \"204792210076_R02C01_Red.idat\" OR \"204792170106_R02C01_Grn.idat\" OR \"204792170106_R02C01_Red.idat\" OR \"204792770071_R02C01_Grn.idat\" OR \"204792770071_R02C01_Red.idat\" OR \"204792780069_R03C01_Grn.idat\" OR \"204792780069_R03C01_Red.idat\" OR \"204792210076_R03C01_Red.idat\" OR \"204792210076_R03C01_Grn.idat\" OR \"204792780069_R04C01_Red.idat\" OR \"204792780069_R04C01_Grn.idat\" OR \"204792210076_R04C01_Red.idat\" OR \"204792210076_R04C01_Grn.idat\" OR \"204792780062_R05C01_Red.idat\" OR \"204792780062_R05C01_Grn.idat\" OR \"204792200112_R01C01_Grn.idat\" OR \"204792200112_R01C01_Red.idat\" OR \"204792770131_R05C01_Red.idat\" OR \"204792770131_R05C01_Grn.idat\" OR \"204792780069_R06C01_Grn.idat\" OR \"204792780069_R06C01_Red.idat\" OR \"204792210076_R06C01_Grn.idat\" OR \"204792210076_R06C01_Red.idat\" OR \"204792170106_R06C01_Red.idat\" OR \"204792170106_R06C01_Grn.idat\" OR \"204792770071_R06C01_Red.idat\" OR \"204792770071_R06C01_Grn.idat\" OR \"204792170106_R07C01_Red.idat\" OR \"204792170106_R07C01_Grn.idat\" OR \"204792770071_R01C01_Grn.idat\" OR \"204792770071_R01C01_Red.idat\" OR \"204792770071_R07C01_Red.idat\" OR \"204792770071_R07C01_Grn.idat\" OR \"204792780062_R07C01_Red.idat\" OR \"204792780062_R07C01_Grn.idat\" OR \"204792770131_R07C01_Grn.idat\" OR \"204792770131_R07C01_Red.idat\" OR \"204792780069_R08C01_Red.idat\" OR \"204792780069_R08C01_Grn.idat\" OR \"204792210076_R08C01_Grn.idat\" OR \"204792210076_R08C01_Red.idat\" OR \"204792170105_R01C01_Grn.idat\" OR \"204792170105_R01C01_Red.idat\" OR \"204792780062_R08C01_Grn.idat\" OR \"204792780062_R08C01_Red.idat\" OR \"204792770131_R08C01_Red.idat\" OR \"204792770131_R08C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "factors_3",
+          "type" : "Factors Table",
+          "attributes" : [ {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "time",
+            "value" : "1 month"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "22",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780069_R01C01_Red.idat\" OR \"204792780069_R01C01_Grn.idat\" OR \"204792780062_R02C01_Grn.idat\" OR \"204792780062_R02C01_Red.idat\" OR \"204792770131_R02C01_Grn.idat\" OR \"204792770131_R02C01_Red.idat\" OR \"204792170106_R03C01_Red.idat\" OR \"204792170106_R03C01_Grn.idat\" OR \"204792770071_R03C01_Grn.idat\" OR \"204792770071_R03C01_Red.idat\" OR \"204792780062_R03C01_Grn.idat\" OR \"204792780062_R03C01_Red.idat\" OR \"204792770131_R03C01_Red.idat\" OR \"204792770131_R03C01_Grn.idat\" OR \"204792210076_R01C01_Red.idat\" OR \"204792210076_R01C01_Grn.idat\" OR \"204792170106_R04C01_Grn.idat\" OR \"204792170106_R04C01_Red.idat\" OR \"204792770071_R04C01_Red.idat\" OR \"204792770071_R04C01_Grn.idat\" OR \"204792780062_R04C01_Grn.idat\" OR \"204792780062_R04C01_Red.idat\" OR \"204792770131_R04C01_Grn.idat\" OR \"204792770131_R04C01_Red.idat\" OR \"204792780069_R05C01_Grn.idat\" OR \"204792780069_R05C01_Red.idat\" OR \"204792210076_R05C01_Red.idat\" OR \"204792210076_R05C01_Grn.idat\" OR \"204792170106_R05C01_Red.idat\" OR \"204792170106_R05C01_Grn.idat\" OR \"204792770071_R05C01_Grn.idat\" OR \"204792770071_R05C01_Red.idat\" OR \"204792780062_R06C01_Grn.idat\" OR \"204792780062_R06C01_Red.idat\" OR \"204792770131_R06C01_Grn.idat\" OR \"204792770131_R06C01_Red.idat\" OR \"204792780069_R07C01_Red.idat\" OR \"204792780069_R07C01_Grn.idat\" OR \"204792210076_R07C01_Grn.idat\" OR \"204792210076_R07C01_Red.idat\" OR \"204792170106_R08C01_Red.idat\" OR \"204792170106_R08C01_Grn.idat\" OR \"204792770071_R08C01_Grn.idat\" OR \"204792770071_R08C01_Red.idat\""
+            } ]
+          } ]
+        } ] ]
+      }, {
+        "accno" : "source_chars-E-MTAB-17025",
+        "type" : "Source Characteristics",
+        "attributes" : [ {
+          "name" : "Organism",
+          "value" : "Homo sapiens"
+        }, {
+          "name" : "Developmental stage",
+          "value" : "adult"
+        }, {
+          "name" : "Organism part",
+          "value" : "blood"
+        }, {
+          "name" : "Age",
+          "value" : "18 year"
+        }, {
+          "name" : "Age",
+          "value" : "39 year"
+        }, {
+          "name" : "Age",
+          "value" : "29 year"
+        }, {
+          "name" : "Age",
+          "value" : "21 year"
+        }, {
+          "name" : "Age",
+          "value" : "51 year"
+        }, {
+          "name" : "Age",
+          "value" : "22 year"
+        }, {
+          "name" : "Age",
+          "value" : "24 year"
+        }, {
+          "name" : "Age",
+          "value" : "28 year"
+        }, {
+          "name" : "Age",
+          "value" : "34 year"
+        }, {
+          "name" : "Age",
+          "value" : "54 year"
+        }, {
+          "name" : "Age",
+          "value" : "23 year"
+        }, {
+          "name" : "Age",
+          "value" : "31 year"
+        }, {
+          "name" : "Age",
+          "value" : "25 year"
+        }, {
+          "name" : "Age",
+          "value" : "52 year"
+        }, {
+          "name" : "Age",
+          "value" : "33 year"
+        }, {
+          "name" : "Age",
+          "value" : "... 11 other values"
+        }, {
+          "name" : "Sex",
+          "value" : "male"
+        }, {
+          "name" : "Sex",
+          "value" : "female"
+        }, {
+          "name" : "Individual",
+          "value" : "3"
+        }, {
+          "name" : "Individual",
+          "value" : "39"
+        }, {
+          "name" : "Individual",
+          "value" : "13"
+        }, {
+          "name" : "Individual",
+          "value" : "30"
+        }, {
+          "name" : "Individual",
+          "value" : "51"
+        }, {
+          "name" : "Individual",
+          "value" : "35"
+        }, {
+          "name" : "Individual",
+          "value" : "38"
+        }, {
+          "name" : "Individual",
+          "value" : "28"
+        }, {
+          "name" : "Individual",
+          "value" : "2"
+        }, {
+          "name" : "Individual",
+          "value" : "22"
+        }, {
+          "name" : "Individual",
+          "value" : "48"
+        }, {
+          "name" : "Individual",
+          "value" : "9"
+        }, {
+          "name" : "Individual",
+          "value" : "11"
+        }, {
+          "name" : "Individual",
+          "value" : "45"
+        }, {
+          "name" : "Individual",
+          "value" : "20"
+        }, {
+          "name" : "Individual",
+          "value" : "... 33 other values"
+        }, {
+          "name" : "Disease",
+          "value" : "Vegan Diet"
+        }, {
+          "name" : "Disease",
+          "value" : "Meat-rich Diet"
+        }, {
+          "name" : "Diet",
+          "value" : "1"
+        }, {
+          "name" : "Diet",
+          "value" : "0"
+        } ],
+        "subsections" : [ [ {
+          "accno" : "source_0",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "34 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "2"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R01C01_Grn.idat\" OR \"204792770116_R01C01_Red.idat\" OR \"204792780069_R01C01_Red.idat\" OR \"204792780069_R01C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_1",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "45 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "8"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R01C01_Red.idat\" OR \"204792780062_R01C01_Grn.idat\" OR \"204792170105_R01C01_Grn.idat\" OR \"204792170105_R01C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_2",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "24 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "9"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770030_R01C01_Red.idat\" OR \"204792770030_R01C01_Grn.idat\" OR \"204792770131_R01C01_Grn.idat\" OR \"204792770131_R01C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_3",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "30 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "10"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R02C01_Grn.idat\" OR \"204792770116_R02C01_Red.idat\" OR \"204792780069_R02C01_Red.idat\" OR \"204792780069_R02C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_4",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "33 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "11"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170107_R02C01_Grn.idat\" OR \"204792170107_R02C01_Red.idat\" OR \"204792210076_R02C01_Grn.idat\" OR \"204792210076_R02C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_5",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "45 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "12"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792200112_R02C01_Grn.idat\" OR \"204792200112_R02C01_Red.idat\" OR \"204792170106_R02C01_Grn.idat\" OR \"204792170106_R02C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_6",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "26 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "13"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170061_R02C01_Grn.idat\" OR \"204792170061_R02C01_Red.idat\" OR \"204792770071_R02C01_Grn.idat\" OR \"204792770071_R02C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_7",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "22 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "14"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R02C01_Grn.idat\" OR \"204792780062_R02C01_Red.idat\" OR \"204792170105_R02C01_Grn.idat\" OR \"204792170105_R02C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_8",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "26 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "15"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770030_R02C01_Grn.idat\" OR \"204792770030_R02C01_Red.idat\" OR \"204792770131_R02C01_Grn.idat\" OR \"204792770131_R02C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_9",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "29 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "16"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R03C01_Grn.idat\" OR \"204792770116_R03C01_Red.idat\" OR \"204792780069_R03C01_Grn.idat\" OR \"204792780069_R03C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_10",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "23 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "17"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170107_R03C01_Red.idat\" OR \"204792170107_R03C01_Grn.idat\" OR \"204792210076_R03C01_Red.idat\" OR \"204792210076_R03C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_11",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "55 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "18"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792200112_R03C01_Grn.idat\" OR \"204792200112_R03C01_Red.idat\" OR \"204792170106_R03C01_Red.idat\" OR \"204792170106_R03C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_12",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "30 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "3"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170107_R01C01_Red.idat\" OR \"204792170107_R01C01_Grn.idat\" OR \"204792210076_R01C01_Red.idat\" OR \"204792210076_R01C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_13",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "54 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "19"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170061_R03C01_Red.idat\" OR \"204792170061_R03C01_Grn.idat\" OR \"204792770071_R03C01_Grn.idat\" OR \"204792770071_R03C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_14",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "39 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "20"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R03C01_Grn.idat\" OR \"204792780062_R03C01_Red.idat\" OR \"204792170105_R03C01_Red.idat\" OR \"204792170105_R03C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_15",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "22 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "21"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770030_R03C01_Grn.idat\" OR \"204792770030_R03C01_Red.idat\" OR \"204792770131_R03C01_Red.idat\" OR \"204792770131_R03C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_16",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "29 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "22"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R04C01_Grn.idat\" OR \"204792770116_R04C01_Red.idat\" OR \"204792780069_R04C01_Red.idat\" OR \"204792780069_R04C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_17",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "32 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "26"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170107_R04C01_Grn.idat\" OR \"204792170107_R04C01_Red.idat\" OR \"204792210076_R04C01_Red.idat\" OR \"204792210076_R04C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_18",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "24 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "27"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792200112_R04C01_Red.idat\" OR \"204792200112_R04C01_Grn.idat\" OR \"204792170106_R04C01_Grn.idat\" OR \"204792170106_R04C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_19",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "30 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "28"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170061_R04C01_Red.idat\" OR \"204792170061_R04C01_Grn.idat\" OR \"204792770071_R04C01_Red.idat\" OR \"204792770071_R04C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_20",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "18 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "29"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R04C01_Grn.idat\" OR \"204792780062_R04C01_Red.idat\" OR \"204792170105_R04C01_Grn.idat\" OR \"204792170105_R04C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_21",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "20 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "30"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770030_R04C01_Grn.idat\" OR \"204792770030_R04C01_Red.idat\" OR \"204792770131_R04C01_Grn.idat\" OR \"204792770131_R04C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_22",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "52 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "31"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R05C01_Grn.idat\" OR \"204792770116_R05C01_Red.idat\" OR \"204792780069_R05C01_Grn.idat\" OR \"204792780069_R05C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_23",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "25 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "5"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170106_R01C01_Grn.idat\" OR \"204792170106_R01C01_Red.idat\" OR \"204792200112_R01C01_Grn.idat\" OR \"204792200112_R01C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_24",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "23 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "32"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170107_R05C01_Grn.idat\" OR \"204792170107_R05C01_Red.idat\" OR \"204792210076_R05C01_Red.idat\" OR \"204792210076_R05C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_25",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "22 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "33"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792200112_R05C01_Red.idat\" OR \"204792200112_R05C01_Grn.idat\" OR \"204792170106_R05C01_Red.idat\" OR \"204792170106_R05C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_26",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "21 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "34"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170061_R05C01_Grn.idat\" OR \"204792170061_R05C01_Red.idat\" OR \"204792770071_R05C01_Grn.idat\" OR \"204792770071_R05C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_27",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "22 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "35"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R05C01_Red.idat\" OR \"204792780062_R05C01_Grn.idat\" OR \"204792170105_R05C01_Red.idat\" OR \"204792170105_R05C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_28",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "24 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "36"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770030_R05C01_Grn.idat\" OR \"204792770030_R05C01_Red.idat\" OR \"204792770131_R05C01_Red.idat\" OR \"204792770131_R05C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_29",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "26 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "37"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R06C01_Red.idat\" OR \"204792770116_R06C01_Grn.idat\" OR \"204792780069_R06C01_Grn.idat\" OR \"204792780069_R06C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_30",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "53 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "38"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170107_R06C01_Red.idat\" OR \"204792170107_R06C01_Grn.idat\" OR \"204792210076_R06C01_Grn.idat\" OR \"204792210076_R06C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_31",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "24 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "39"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792200112_R06C01_Red.idat\" OR \"204792200112_R06C01_Grn.idat\" OR \"204792170106_R06C01_Red.idat\" OR \"204792170106_R06C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_32",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "48 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "40"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170061_R06C01_Red.idat\" OR \"204792170061_R06C01_Grn.idat\" OR \"204792770071_R06C01_Red.idat\" OR \"204792770071_R06C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_33",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "25 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "41"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R06C01_Grn.idat\" OR \"204792780062_R06C01_Red.idat\" OR \"204792170105_R06C01_Red.idat\" OR \"204792170105_R06C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_34",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "27 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "6"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170061_R01C01_Red.idat\" OR \"204792170061_R01C01_Grn.idat\" OR \"204792770071_R01C01_Grn.idat\" OR \"204792770071_R01C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_35",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "22 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "42"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770030_R06C01_Red.idat\" OR \"204792770030_R06C01_Grn.idat\" OR \"204792770131_R06C01_Grn.idat\" OR \"204792770131_R06C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_36",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "25 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "43"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R07C01_Red.idat\" OR \"204792770116_R07C01_Grn.idat\" OR \"204792780069_R07C01_Red.idat\" OR \"204792780069_R07C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_37",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "30 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "45"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170107_R07C01_Red.idat\" OR \"204792170107_R07C01_Grn.idat\" OR \"204792210076_R07C01_Grn.idat\" OR \"204792210076_R07C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_38",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "26 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "46"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792200112_R07C01_Grn.idat\" OR \"204792200112_R07C01_Red.idat\" OR \"204792170106_R07C01_Red.idat\" OR \"204792170106_R07C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_39",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "32 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "47"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170061_R07C01_Grn.idat\" OR \"204792170061_R07C01_Red.idat\" OR \"204792770071_R07C01_Red.idat\" OR \"204792770071_R07C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_40",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "27 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "48"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R07C01_Red.idat\" OR \"204792780062_R07C01_Grn.idat\" OR \"204792170105_R07C01_Red.idat\" OR \"204792170105_R07C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_41",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "47 year"
+          }, {
+            "name" : "sex",
+            "value" : "male"
+          }, {
+            "name" : "individual",
+            "value" : "49"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770030_R07C01_Red.idat\" OR \"204792770030_R07C01_Grn.idat\" OR \"204792770131_R07C01_Grn.idat\" OR \"204792770131_R07C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_42",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "51 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "50"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770116_R08C01_Grn.idat\" OR \"204792770116_R08C01_Red.idat\" OR \"204792780069_R08C01_Red.idat\" OR \"204792780069_R08C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_43",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "36 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "51"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170107_R08C01_Grn.idat\" OR \"204792170107_R08C01_Red.idat\" OR \"204792210076_R08C01_Grn.idat\" OR \"204792210076_R08C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_44",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "24 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "54"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792200112_R08C01_Red.idat\" OR \"204792200112_R08C01_Grn.idat\" OR \"204792170106_R08C01_Red.idat\" OR \"204792170106_R08C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_45",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "28 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "55"
+          }, {
+            "name" : "disease",
+            "value" : "Meat-rich Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792170061_R08C01_Red.idat\" OR \"204792170061_R08C01_Grn.idat\" OR \"204792770071_R08C01_Grn.idat\" OR \"204792770071_R08C01_Red.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_46",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "31 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "56"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "1"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792780062_R08C01_Grn.idat\" OR \"204792780062_R08C01_Red.idat\" OR \"204792170105_R08C01_Red.idat\" OR \"204792170105_R08C01_Grn.idat\""
+            } ]
+          } ]
+        }, {
+          "accno" : "source_47",
+          "type" : "Characteristics Table",
+          "attributes" : [ {
+            "name" : "age",
+            "value" : "20 year"
+          }, {
+            "name" : "sex",
+            "value" : "female"
+          }, {
+            "name" : "individual",
+            "value" : "57"
+          }, {
+            "name" : "disease",
+            "value" : "Vegan Diet"
+          }, {
+            "name" : "diet",
+            "value" : "0"
+          }, {
+            "name" : "No. of Samples",
+            "value" : "2",
+            "valqual" : [ {
+              "name" : "search",
+              "value" : "\"204792770030_R08C01_Grn.idat\" OR \"204792770030_R08C01_Red.idat\" OR \"204792770131_R08C01_Red.idat\" OR \"204792770131_R08C01_Grn.idat\""
+            } ]
+          } ]
+        } ] ]
+      } ]
+    }, {
+      "accno" : "s-assays-data-E-MTAB-17025",
+      "type" : "Assays and Data",
+      "attributes" : [ {
+        "name" : "Assay count",
+        "value" : "192"
+      }, {
+        "name" : "Technology",
+        "value" : "Array assay"
+      }, {
+        "name" : "Assay by Molecule",
+        "value" : "DNA assay"
+      } ],
+      "subsections" : [ {
+        "accno" : "raw-data",
+        "type" : "Raw Data",
+        "files" : [ [ {
+          "path" : "204792770116_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 1"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 1"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 10"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 10"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 11"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 11"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 12"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 12"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 13"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 13"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 14"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 14"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 15"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 15"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R02C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 16"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R02C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 16"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 17"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 17"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 18"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 18"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R02C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 19"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R02C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 19"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 2"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 2"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 20"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 20"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 21"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 21"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 22"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 22"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 23"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 23"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R02C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 24"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R02C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 24"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 25"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 25"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 26"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 26"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 27"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 27"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R03C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 28"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R03C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 28"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 29"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 29"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 3"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 3"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 30"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 30"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R03C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 31"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R03C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 31"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 32"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 32"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 33"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 33"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 34"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 34"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 35"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 35"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R03C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 36"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R03C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 36"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 37"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 37"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 38"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 38"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 39"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 39"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R01C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 4"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R01C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 4"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R04C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 40"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R04C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 40"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 41"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 41"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 42"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 42"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R04C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 43"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R04C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 43"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 44"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 44"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 45"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 45"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 46"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 46"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 47"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 47"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R04C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 48"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R04C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 48"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 49"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 49"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 5"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 5"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 50"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 50"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 51"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 51"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R05C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 52"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R05C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 52"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 53"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 53"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 54"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 54"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R05C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 55"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R05C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 55"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 56"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 56"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 57"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 57"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 58"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 58"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 59"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 59"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 6"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 6"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R05C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 60"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R05C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 60"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 61"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 61"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 62"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 62"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 63"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 63"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R06C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 64"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R06C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 64"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 65"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 65"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 66"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 66"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R06C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 67"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R06C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 67"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 68"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 68"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 69"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 69"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R01C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 7"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R01C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 7"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 70"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 70"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 71"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 71"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R06C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 72"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R06C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 72"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 73"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 73"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 74"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 74"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 75"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 75"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R07C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 76"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R07C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 76"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 77"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 77"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 78"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 78"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R07C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 79"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R07C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 79"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 8"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 8"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 80"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 80"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 81"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 81"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 82"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 82"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R07C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 83"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R07C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 83"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R07C01_Grn.idat",
+          "size" : 13677976,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 84"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R07C01_Red.idat",
+          "size" : 13677976,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 84"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 85"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770116_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 85"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 86"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780069_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 86"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 87"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170107_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 87"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R08C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 88"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792210076_R08C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 88"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 89"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792200112_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 89"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R01C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 9"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R01C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 9"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 90"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170106_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 90"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R08C01_Red.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 91"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170061_R08C01_Grn.idat",
+          "size" : 13677980,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 91"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 92"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770071_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 92"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 93"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792780062_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 93"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 94"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792170105_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 94"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 95"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770030_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 95"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R08C01_Red.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 96"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "204792770131_R08C01_Grn.idat",
+          "size" : 13677975,
+          "attributes" : [ {
+            "name" : "Samples",
+            "value" : "Sample 96"
+          }, {
+            "name" : "Description",
+            "value" : "Raw data file"
+          } ],
+          "type" : "file"
+        } ] ]
+      }, {
+        "accno" : "processed-data",
+        "type" : "Processed Data",
+        "files" : [ [ {
+          "path" : "b_values4.txt",
+          "size" : 1494040132,
+          "attributes" : [ {
+            "name" : "Description",
+            "value" : "Processed Data"
+          } ],
+          "type" : "file"
+        } ] ]
+      }, {
+        "accno" : "mt-E-MTAB-17025",
+        "type" : "MAGE-TAB Files",
+        "files" : [ [ {
+          "path" : "E-MTAB-17025.idf.txt",
+          "size" : 4938,
+          "attributes" : [ {
+            "name" : "Type",
+            "value" : "IDF File"
+          }, {
+            "name" : "Format",
+            "value" : "tab-delimited text"
+          }, {
+            "name" : "Description",
+            "value" : "Investigation Design Format (IDF)"
+          } ],
+          "type" : "file"
+        }, {
+          "path" : "E-MTAB-17025.sdrf.txt",
+          "size" : 68316,
+          "attributes" : [ {
+            "name" : "Type",
+            "value" : "SDRF File"
+          }, {
+            "name" : "Format",
+            "value" : "tab-delimited text"
+          }, {
+            "name" : "Description",
+            "value" : "Sample and Data Relationship Format (SDRF)"
+          } ],
+          "type" : "file"
+        } ] ]
+      }, {
+        "accno" : "ad-E-MTAB-17025",
+        "type" : "Array Designs",
+        "links" : [ [ {
+          "url" : "A-GEOD-21145",
+          "attributes" : [ {
+            "name" : "Type",
+            "value" : "Array Design"
+          } ]
+        } ] ]
+      } ]
+    }, {
+      "accno" : "score-E-MTAB-17025",
+      "type" : "MIAME Score",
+      "attributes" : [ {
+        "name" : "Platforms",
+        "value" : "-"
+      }, {
+        "name" : "Protocols",
+        "value" : "*"
+      }, {
+        "name" : "Variables",
+        "value" : "*"
+      }, {
+        "name" : "Processed",
+        "value" : "*"
+      }, {
+        "name" : "Raw",
+        "value" : "*"
+      } ]
+    }, {
+      "accno" : "o2",
+      "type" : "organisation",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "UCSD - University of California San Diego"
+      }, {
+        "name" : "RORID",
+        "value" : "https://ror.org/0168r3w48"
+      } ]
+    }, {
+      "accno" : "o3",
+      "type" : "organisation",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "Salk Institute for Biological Studies"
+      }, {
+        "name" : "RORID",
+        "value" : "https://ror.org/03xez1567"
+      } ]
+    }, {
+      "type" : "Author",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "Jerome Mertens"
+      }, {
+        "name" : "Email",
+        "value" : "jmertens@health.ucsd.edu"
+      }, {
+        "name" : "Role",
+        "value" : "Corresponding Author"
+      }, {
+        "name" : "affiliation",
+        "value" : "o2",
+        "reference" : true
+      }, {
+        "name" : "affiliation",
+        "value" : "o3",
+        "reference" : true
+      } ]
+    }, {
+      "type" : "Author",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "Maximilian Storz"
+      }, {
+        "name" : "Email",
+        "value" : "maximilian.storz@uniklinik-freiburg.de"
+      }, {
+        "name" : "Role",
+        "value" : "Corresponding Author"
+      }, {
+        "name" : "affiliation",
+        "value" : "o4",
+        "reference" : true
+      } ]
+    }, {
+      "accno" : "o4",
+      "type" : "organisation",
+      "attributes" : [ {
+        "name" : "Name",
+        "value" : "University Medical Center Freiburg"
+      }, {
+        "name" : "RORID",
+        "value" : "https://ror.org/03vzbgh69"
+      } ]
+    } ]
+  },
+  "type" : "submission"
+}

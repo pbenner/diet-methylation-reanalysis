@@ -1,0 +1,29 @@
+{
+  "inputs": {
+    "source_sha256": {
+      "scripts/shuffled_example.py": "e3a1f988aff91530d416c3bb6c443d772baaad9fb0131bc4758a27c88db2fd32",
+      "scripts/figure1b_limma.R": "6b335d41d0e3886b81ff0d143ad6a9ff75ee4655cbf3d6d0c5d8214f9797621d",
+      "scripts/run_r.sh": "a8eef55c9aa0dd79d79b684e9aa079e7a5708b4b32ded37bac6ac89c53511156",
+      "data/processed/audit.json": "0209c7329e1a7d83a1fa2f207b42bf2923d38e50d24c9cdfb52bb286d471d831",
+      "data/processed/samples.csv": "b9c571115eb8e35ef1aa11edfb5ac544c3cb70f262db70356a50a8c074865fc1",
+      "data/processed/cpg_ids.txt": "bd55e2c70777d73127e4db16de85cf88c60b92b7504d310b4e82f66b9d827b0b",
+      "results/diet_code/permutation_run.json": "47262963b0f7d21aebd112fa52ad34a64d6118b4f4802ba89a878f2b217eac43",
+      "results/diet_code/permutation_null_counts.csv": "31d93f15da6ee2cc634208244ab9e93b7f4eae5ca5445e1a00a5366a9cd71604"
+    },
+    "matrix_bytes": 624333312,
+    "matrix_mtime_ns": 1792331443643674109,
+    "example_seed": 70900
+  },
+  "shuffle_number": 1,
+  "seed": 70900,
+  "selection": "first assignment from the specified seed; seed selected before fitting",
+  "method": "same R limma 3.54.0 model and thresholds as the observed fit",
+  "p_values": "two-sided limma p-values fitted to this one shuffled grouping",
+  "assignment_unit": "participant; one assignment shared by both visits and every CpG",
+  "count_test_seed": 70899,
+  "observed_counts_in_this_shuffle": {
+    "before": 227,
+    "after": 202
+  },
+  "verification": "group sizes and red-site counts verified against the R fitted results"
+}

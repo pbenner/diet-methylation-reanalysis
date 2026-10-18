@@ -1,0 +1,32 @@
+# Local environments and downloaded runtimes
+/.venv/
+/.tools/
+
+# Python, Jupyter, and editor caches
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.cache/
+.DS_Store
+/.idea/
+/.vscode/
+
+# Local credentials and assistant state
+/.env
+/.env.*
+/.agents/
+/.codex/
+
+# Temporary downloads, generated files, and interactive R sessions
+*.part
+*.tmp
+.Rhistory
+.RData
+
+# Large public inputs and reproducible full per-CpG tables
+# Keep the download manifest, small annotations, summaries, and figures in Git.
+/data/raw/b_values4.txt*
+/data/processed/*.bin
+/data/processed/*.npy
+/results/**/*.csv.gz

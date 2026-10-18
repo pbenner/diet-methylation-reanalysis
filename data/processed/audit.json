@@ -1,0 +1,26 @@
+{
+  "matrix_shape": [
+    812934,
+    96
+  ],
+  "dtype": "little-endian float64, C row order",
+  "beta_min": 0.0195704669287248,
+  "beta_max": 0.996379673115162,
+  "matrix_sha256": "5a4e4ada316b7317a0b61dcde7a5e15ed95968f338ae974fc7a9b99f59e9fa19",
+  "participants": 48,
+  "numeric_group_counts": {
+    "1": 24,
+    "0": 24
+  },
+  "named_group_counts": {
+    "Meat-rich Diet": 22,
+    "Vegan Diet": 26
+  },
+  "cross_tab": {
+    "1|Meat-rich Diet": 9,
+    "0|Meat-rich Diet": 13,
+    "0|Vegan Diet": 11,
+    "1|Vegan Diet": 15
+  },
+  "status": "Conflicting diet annotations. Numeric codes have no verified diet-name mapping; all analyses provisional."
+}

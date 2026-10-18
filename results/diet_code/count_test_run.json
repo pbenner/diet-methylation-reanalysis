@@ -1,0 +1,21 @@
+{
+  "statistic": "number of CpGs passing limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
+  "tail": "upper: shuffled count >= observed count, including ties",
+  "p_formula": "(1 + shuffles_ge_observed) / (B + 1)",
+  "interpretation": "test for an excess of red sites, separately at each visit; no across-visit adjustment",
+  "group_field": "diet_code",
+  "permutations": 9999,
+  "seed": 70899,
+  "permutation_unit": "participant; one assignment shared by both visits and every CpG",
+  "variance_prior": "re-estimated across all sites for each permutation",
+  "randomization": "unrestricted fixed-size participant shuffles; not the original blocked allocation",
+  "original_trial_reported_block_size": 13,
+  "original_trial_methods": "https://doi.org/10.3390/microorganisms9040727",
+  "limitations": [
+    "Participant-to-block mapping and full allocation procedure are unavailable in the deposit.",
+    "Conflicting numeric and named diet annotations prevent verification of the original grouping.",
+    "The candidate model gives 158/176 sites; the paper reports 158/182.",
+    "Calibration requires joint exchangeability of whole participant profiles under the chosen null.",
+    "A large p-value does not establish absence of a diet effect or identify individual false positives."
+  ]
+}

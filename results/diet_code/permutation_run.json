@@ -1,0 +1,26 @@
+{
+  "group_field": "diet_code",
+  "numerator": "0",
+  "denominator": "1",
+  "repetitions": 9999,
+  "seed": 70899,
+  "batch_size": 32,
+  "workers": 4,
+  "tail": "upper: shuffled red-site count >= observed count, including ties",
+  "correction": "(extreme+1)/(B+1)",
+  "permutation_unit": "participant; one assignment shared by both visits and every CpG",
+  "variance_prior": "re-estimated across all sites for each permutation",
+  "model": "unblocked four group-by-time means, matching candidate original model",
+  "assumption": "unrestricted participant exchangeability, conditional on group counts; allocation blocks unavailable",
+  "status": "provisional: conflicting deposited diet labels and missing author analysis code",
+  "observed_df_prior": 3.878290928566853,
+  "observed_s2_prior": 0.03430735131282317,
+  "observed_counts": {
+    "before": 158,
+    "after": 176
+  },
+  "minimum_count_p": 0.0001,
+  "saved_count_rule": "limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
+  "count_test": "run scripts/count_test.py to test for an excess of red sites",
+  "retained_run": "The existing 9,999 shuffled count pairs were retained unchanged; no full rerun was performed."
+}

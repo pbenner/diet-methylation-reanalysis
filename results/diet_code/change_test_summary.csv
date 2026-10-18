@@ -1,0 +1,2 @@
+observed_before,observed_after,observed_change,shuffled_median_change,shuffled_q025_change,shuffled_q975_change,shuffles_ge_observed,permutations,change_p_upper,change_p_mc_se_approx
+158,176,18,2.0,-88.0,94.0,2629,9999,0.263,0.004402844365163318

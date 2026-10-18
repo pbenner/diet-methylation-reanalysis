@@ -1,0 +1,51 @@
+{
+  "source_sha256": {
+    "E-MTAB-17025.sdrf.txt": "492cad1d8c9a05db93fcc152b16972a6d44324b15a5abf2f51a59e2818e1c5dd",
+    "E-MTAB-17025.idf.txt": "1c01e7da9ded3e7ea6d4b54115417577dbef88af5841f21bd78fbf478af9e3b9",
+    "b_values4.txt": "5a4e4ada316b7317a0b61dcde7a5e15ed95968f338ae974fc7a9b99f59e9fa19"
+  },
+  "binary_sha256": "7c1f4e3f38329ffb7694837f88c96a8b869e43b6347afeb43937eca61da06fb2",
+  "source_values_checked": 78041664,
+  "all_source_values_and_cpg_order_identical": true,
+  "source_annotations_match_prepared_samples": true,
+  "participants": 48,
+  "public_numeric_sex_counts": {
+    "0": {
+      "female": 16,
+      "male": 8
+    },
+    "1": {
+      "female": 16,
+      "male": 8
+    }
+  },
+  "source_group_crosstab": {
+    "0": {
+      "Meat-rich Diet": 13,
+      "Vegan Diet": 11
+    },
+    "1": {
+      "Meat-rich Diet": 9,
+      "Vegan Diet": 15
+    }
+  },
+  "independent_r_model": "uncentered M-values, intercept + diet + visit + diet:visit",
+  "independent_real_data_fits": 11,
+  "all_independent_r_counts_match": true,
+  "observed_max_absolute_errors": {
+    "max_abs_effect_error_1": 5.995204332975851e-15,
+    "max_abs_t_error_1": 1.62259095048967e-13,
+    "max_abs_p_error_1": 1.26454402504805e-13,
+    "max_abs_bh_error_1": 2.1427304375265502e-14,
+    "max_abs_effect_error_2": 7.60502771868232e-15,
+    "max_abs_t_error_2": 2.48689957516035e-13,
+    "max_abs_p_error_2": 1.70641278884887e-13,
+    "max_abs_bh_error_2": 2.40918396343659e-13
+  },
+  "observed_change": 18,
+  "shuffles_ge_observed": 2629,
+  "permutations": 9999,
+  "p_upper": 0.263,
+  "permutation_count_sha256": "31d93f15da6ee2cc634208244ab9e93b7f4eae5ca5445e1a00a5366a9cd71604",
+  "elapsed_seconds": 164.74
+}

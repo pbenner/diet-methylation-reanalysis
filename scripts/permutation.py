@@ -64,15 +64,25 @@ def highlighted_counts(effects, variance, df, unscaled):
 
 def prepare_matrices(beta, samples, field):
     """Align two arrays by participant ID; never permute the two visits separately."""
+    if beta.ndim != 2 or beta.shape[1] != len(samples):
+        raise ValueError("Expected one metadata row for each matrix column")
+    matrix_indices = samples.matrix_index.to_numpy()
+    if (not np.issubdtype(matrix_indices.dtype, np.integer)
+            or not np.array_equal(np.sort(matrix_indices), np.arange(beta.shape[1]))):
+        raise ValueError("Matrix indices must identify each column exactly once")
+    if samples.participant.isna().any() or not samples.time.isin([0, 1]).all():
+        raise ValueError("Expected participant IDs and visits 0/1")
     people = sorted(samples.participant.unique())
-    indices = []
+    indices, aligned = [], []
     for time in (0, 1):
         sub = samples[samples.time == time]
         if sub.participant.duplicated().any() or set(sub.participant) != set(people):
             raise ValueError("Incomplete/duplicated participant pairs")
-        indices.append(sub.set_index("participant").loc[people, "matrix_index"].to_numpy())
-    first = samples.iloc[indices[0]]
-    second = samples.iloc[indices[1]]
+        sub = sub.set_index("participant").loc[people]
+        aligned.append(sub)
+        indices.append(sub.matrix_index.to_numpy())
+    # Matrix indices identify beta columns, not positions in a reordered DataFrame.
+    first, second = aligned
     if not np.array_equal(first[field].to_numpy(), second[field].to_numpy()):
         raise ValueError("Diet varies within participant")
     groups = ["0", "1"] if field == "diet_code" else ["Vegan Diet", "Meat-rich Diet"]

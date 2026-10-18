@@ -1,0 +1,13 @@
+{
+  "method": "independent Monte Carlo check; seed specified before fitting",
+  "repetitions": 9999,
+  "seed": 70901,
+  "original_count_sha256": "31d93f15da6ee2cc634208244ab9e93b7f4eae5ca5445e1a00a5366a9cd71604",
+  "observed_change": 18,
+  "shuffles_ge_observed_change": 2623,
+  "p_upper": 0.2624,
+  "elapsed_seconds": 163.17,
+  "numpy_version": "2.5.4",
+  "rng": "numpy.default_rng (PCG64)",
+  "permutation_script_sha256": "d9d4a0137dac0be5524a495414b6048bf4e8e4a561754e26b434dc8a10814e5f"
+}

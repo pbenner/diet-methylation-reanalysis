@@ -1,0 +1,62 @@
+{
+  "summary_consistency": {
+    "all_summary_fields_and_shuffle_ids_match": true,
+    "observed_change": 18,
+    "permutations": 9999,
+    "shuffles_ge_observed": 2629,
+    "p_upper": 0.263
+  },
+  "direct_residual_fit_matches_saved_limma": true,
+  "invariances": {
+    "swap_group_names": {
+      "max_abs_effect_error": 0.0,
+      "max_abs_t_error": 1.7763568394002505e-15,
+      "max_abs_p_error": 4.440892098500626e-16,
+      "red_counts": [
+        158,
+        176
+      ],
+      "passed": true
+    },
+    "reverse_visits": {
+      "max_abs_effect_error": 0.0,
+      "max_abs_t_error": 1.7763568394002505e-15,
+      "max_abs_p_error": 4.440892098500626e-16,
+      "red_counts": [
+        176,
+        158
+      ],
+      "passed": true
+    },
+    "reorder_participants": {
+      "max_abs_effect_error": 4.440892098500626e-16,
+      "max_abs_t_error": 2.6645352591003757e-15,
+      "max_abs_p_error": 6.661338147750939e-16,
+      "red_counts": [
+        158,
+        176
+      ],
+      "passed": true
+    }
+  },
+  "closest_distance_to_observed_cutoffs": {
+    "before": {
+      "absolute_effect_0_5": 6.642872878992456e-06,
+      "raw_p_0_05": 4.668425460999104e-07
+    },
+    "after": {
+      "absolute_effect_0_5": 0.0001281303760239938,
+      "raw_p_0_05": 1.008236428998166e-07
+    }
+  },
+  "pair_distance_qc": {
+    "metric": "root mean squared beta difference across every deposited CpG",
+    "before_arrays_with_annotated_after_as_nearest": 46,
+    "after_arrays_with_annotated_before_as_nearest": 45,
+    "participants": 48,
+    "minimum_distinct_array_rmse": 0.021579659560355378,
+    "interpretation": "descriptive distance QC only; cannot establish identity, swaps or exclusions; labels retained"
+  },
+  "count_file_sha256": "31d93f15da6ee2cc634208244ab9e93b7f4eae5ca5445e1a00a5366a9cd71604",
+  "permutation_script_sha256": "d9d4a0137dac0be5524a495414b6048bf4e8e4a561754e26b434dc8a10814e5f"
+}

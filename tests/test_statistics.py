@@ -1,5 +1,6 @@
 """Independent numerical and pairing checks for the statistical implementation."""
 import itertools
+import json
 from pathlib import Path
 import subprocess
 import sys
@@ -16,9 +17,72 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from permutation import highlighted_counts, moderated_t, prepare_matrices
 from count_test import summarize_counts
 from change_test import summarize_change
+from audit_results import validate_saved_summaries
 
 
 class StatisticsTests(unittest.TestCase):
+    def test_saved_summary_audit_rejects_inconsistent_counts_and_shuffle_ids(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            counts = pd.DataFrame({'before':[10,100,20,30],'after':[12,98,23,29]})
+            observed = {'before':10,'after':12}
+            pd.DataFrame([{'time':t,'highlighted':v} for t,v in observed.items()]).to_csv(
+                folder/'limma_summary.csv',index=False)
+            (folder/'permutation_run.json').write_text(json.dumps({
+                'group_field':'diet_code','repetitions':len(counts),'observed_counts':observed}))
+            counts.to_csv(folder/'permutation_null_counts.csv',index=False)
+            result, changes = summarize_change(10,12,counts.before,counts.after)
+            paired = counts.assign(shuffle=np.arange(1,len(counts)+1),change=changes)
+            paired.to_csv(folder/'permutation_null_changes.csv',index=False)
+            pd.DataFrame([result]).to_csv(folder/'change_test_summary.csv',index=False)
+            pd.DataFrame([{'time':t,**summarize_counts(v,counts[t])}
+                          for t,v in observed.items()]).to_csv(folder/'count_test_summary.csv',index=False)
+            self.assertEqual(validate_saved_summaries(folder)['p_upper'],3/5)
+            # Preserve the +2 difference and p-value while making the displayed counts wrong.
+            altered = dict(result,observed_before=11,observed_after=13)
+            pd.DataFrame([altered]).to_csv(folder/'change_test_summary.csv',index=False)
+            with self.assertRaisesRegex(ValueError,'observed_before'):
+                validate_saved_summaries(folder)
+            pd.DataFrame([result]).to_csv(folder/'change_test_summary.csv',index=False)
+            paired.loc[1,'shuffle'] = 1
+            paired.to_csv(folder/'permutation_null_changes.csv',index=False)
+            with self.assertRaisesRegex(ValueError,'Shuffle identifiers'):
+                validate_saved_summaries(folder)
+
+    def test_moderation_edge_cases_against_limma(self):
+        # Exercise infinite prior df, zero-variance offsets and very unequal variances.
+        variances = np.array([np.ones(40),np.zeros(40),np.r_[np.zeros(8),np.ones(32)],
+                              np.geomspace(1e-12,1e8,40)])
+        effects = np.linspace(-2,2,40)
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            np.savetxt(folder/'variance.csv',variances,delimiter=',')
+            np.savetxt(folder/'effect.csv',effects,delimiter=',')
+            script = folder/'reference.R'
+            script.write_text('''
+.libPaths(c(file.path(getwd(), ".tools/r-library"), .libPaths()))
+library(limma)
+stopifnot(as.character(packageVersion("limma"))=="3.54.0")
+folder <- commandArgs(trailingOnly=TRUE)[1]
+v <- as.matrix(read.csv(file.path(folder,"variance.csv"),header=FALSE))
+effect <- scan(file.path(folder,"effect.csv"),quiet=TRUE)
+out <- lapply(1:nrow(v),function(i) {
+ s <- suppressWarnings(squeezeVar(v[i,],df=12,robust=FALSE))
+ df <- min(12+s$df.prior,12*ncol(v))
+ t <- effect/sqrt(s$var.post/3)
+ cbind(t,2*pt(-abs(t),df),s$var.prior,s$df.prior,df)
+})
+write.table(do.call(rbind,out),file.path(folder,"reference.csv"),sep=",",row.names=FALSE,col.names=FALSE)
+''')
+            subprocess.run(['bash',str(ROOT/'scripts/run_r.sh'),str(script),str(folder)],
+                           cwd=ROOT,check=True,capture_output=True)
+            expected = np.loadtxt(folder/'reference.csv',delimiter=',').reshape(4,40,5)
+        for i,variance in enumerate(variances):
+            t,df,scale,prior_df = moderated_t(effects,variance,12,1/3)
+            np.testing.assert_allclose(t,expected[i,:,0],rtol=1e-10,atol=1e-10)
+            np.testing.assert_allclose(2*stats.t.sf(abs(t),df),expected[i,:,1],rtol=1e-9,atol=1e-12)
+            np.testing.assert_allclose([scale,prior_df,df],expected[i,0,2:],rtol=1e-10)
+
     def test_change_uses_paired_counts_and_includes_ties(self):
         result, changes = summarize_change(10, 12, [10, 100, 20, 30], [12, 98, 23, 29])
         np.testing.assert_array_equal(changes, [2, -2, 3, -1])
@@ -66,6 +130,26 @@ class StatisticsTests(unittest.TestCase):
         samples.loc[0, "diet_code"] = "0"
         with self.assertRaisesRegex(ValueError, "Diet varies"):
             prepare_matrices(beta, samples, "diet_code")
+
+    def test_metadata_reordering_preserves_matrix_alignment(self):
+        samples = pd.DataFrame({"participant": ["b", "a", "b", "a"],
+            "time": [1, 0, 0, 1], "diet_code": ["1", "0", "1", "0"],
+            "matrix_index": range(4)})
+        beta = np.array([[0.8, 0.2, 0.4, 0.6], [0.3, 0.4, 0.5, 0.6]])
+        expected, expected_labels, _ = prepare_matrices(beta, samples, "diet_code")
+        # Reorder metadata while keeping the explicit mapping to beta columns.
+        reordered = samples.iloc[[1, 0, 3, 2]].reset_index(drop=True)
+        actual, actual_labels, _ = prepare_matrices(beta, reordered, "diet_code")
+        np.testing.assert_array_equal(actual_labels, expected_labels)
+        for a, e in zip(actual, expected):
+            np.testing.assert_array_equal(a, e)
+
+    def test_pair_alignment_rejects_duplicate_matrix_indices(self):
+        samples = pd.DataFrame({"participant": ["b", "a", "b", "a"],
+            "time": [1, 0, 0, 1], "diet_code": ["1", "0", "1", "0"],
+            "matrix_index": [0, 1, 1, 3]})
+        with self.assertRaisesRegex(ValueError, "each column exactly once"):
+            prepare_matrices(np.full((2, 4), 0.5), samples, "diet_code")
 
     def test_every_small_assignment_against_actual_limma(self):
         # All 20 assignments of 6 participants to groups of 3, each with 2 visits.

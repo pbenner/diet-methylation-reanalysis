@@ -5,7 +5,7 @@ This project reconstructs the methylation comparisons in Figure 1B of
 The main question is whether the increase from **158 red sites before to 176 after
 (+18)** is unusually large when participants are randomly reassigned to groups.
 
-> **Main result:** Among 9,999 participant-label shuffles preserving each person's
+> **Main result for our candidate reconstruction:** Among 9,999 participant-label shuffles preserving each person's
 > before/after samples, 2,629 produced an increase of at least +18 red sites.
 > The one-sided permutation p-value is **0.2630**. The observed increase is therefore
 > not unusual under this unrestricted shuffling scheme.
@@ -106,6 +106,9 @@ reassigned between groups while retaining group sizes of 24/24. This is the
 **unrestricted exchangeability assumption**: under the reference model, the observed
 assignment is comparable with these shuffled assignments. It preserves dependence
 between CpGs and visits and does not require the CpGs to be independent.
+The null applies to whole before/after profiles. Equal average changes between
+groups alone are insufficient to justify these shuffles. Subtracting the baseline
+red count does not make this a general test of a diet-by-time interaction.
 
 The [original trial methods](https://doi.org/10.3390/microorganisms9040727) report
 block randomization with block size 13. The public methylation annotations do not
@@ -220,6 +223,29 @@ translating the codes into diet names. The named groups are a separate sensitivi
 analysis, vegan minus meat-rich. No grouping is chosen by whether it recovers the
 published count. These unresolved labels limit interpretation of all results.
 
+There is also a discrepancy in the reported sex composition. The deposited
+annotations contain **16 men and 32 women**, with **8 men and 16 women in each
+numeric group**. Table 1 of the paper reports **7 men/17 women in the vegan group
+and 11 men/13 women in the meat-rich group** (18 men in total). Relabeling the
+numeric groups cannot resolve this difference in totals. The current public
+annotation files match our downloaded copies, as recorded in
+[the metadata verification](results/audit/public_metadata_verification.json).
+This warrants clarification about the annotations and analyzed cohort; it does
+not establish which source is incorrect. See [Table 1](https://onlinelibrary.wiley.com/doi/10.1002/mco2.70899)
+and the [computed public sex counts](results/audit/public_sex_counts.csv).
+
+As an additional diagnostic, we compared every pair of arrays using the root mean
+squared difference across all deposited beta values. For 46/48 baseline arrays,
+the closest follow-up array belongs to the annotated participant; in the reverse
+direction this holds for 45/48 follow-up arrays. The baseline exceptions are IDs
+29 and 37; the reverse comparison also flags ID 8. These distances cannot establish
+sample identity or a swap. The [paper's quality-control description](https://pmc.ncbi.nlm.nih.gov/articles/PMC13430503/)
+already reports two exceptions to before/after hierarchical clustering and states
+that SNP-based checks agreed with the cohort. Our distance calculation is different
+from that clustering, so the exceptions cannot be equated. We retain every deposited
+pair and recommend requesting the sample-to-participant mapping and SNP-based QC.
+The complete diagnostic is in [pair_distance_check.csv](results/audit/pair_distance_check.csv).
+
 ## Reproduce and inspect the results
 
 The Git repository includes the analysis code, pinned dependencies, tests, public
@@ -308,13 +334,89 @@ seed can slightly change the estimated p-value through Monte Carlo sampling.
 
 ## Validation and saved files
 
-Before a full permutation run, the optimized Python implementation checks every
-observed site's fitted effect, moderated t statistic and p-value against R limma.
-The tests also compare all 20 assignments in a small paired experiment against
-independent R fits, including the red-site counts. Further checks cover participant
-alignment, deterministic threaded calculations, paired count subtraction, ties,
-and the +1 correction. The six tests and all ten notebook code cells passed when
-the change test was added.
+The follow-up audit checks the calculation separately from its interpretation.
+It found no discrepancy affecting the saved **158 → 176, p = 0.2630** result:
+
+- All **78,041,664 deposited beta values** match the prepared binary matrix exactly,
+  including all CpG IDs and sample-column mappings. Source-file hashes match the
+  manifest, and both visits carry the same participant labels.
+- An independent R implementation fits **uncentered M-values with an intercept,
+  diet, visit, and interaction**, rather than the production four-cell coding.
+  Its observed effects, moderated t statistics, raw p-values and BH-adjusted
+  p-values agree with the saved fit to within **2.5 × 10⁻¹³** in absolute value.
+- **Eleven full-data R fits**—the observed grouping and ten saved shuffles—give
+  identical red-site counts. The checks include the first and last assignments,
+  large positive/negative changes, and changes of +17, +18, and +19 around the
+  upper-tail cutoff.
+- A complete replay of **all 9,999 shuffles** reproduces every paired count exactly.
+  The original saved result files are retained unchanged.
+- All **ten automated tests** pass. These also compare every assignment in a
+  small paired experiment with R limma and check tail ties, the +1 correction,
+  participant alignment and deterministic threaded calculations. Added tests
+  check constant, zero and widely varying residual variances against R and ensure
+  that the summary audit rejects inconsistent counts and shuffle identifiers.
+- Independently recomputed summaries match all saved count/change fields and
+  shuffle identifiers. A fit using explicit within-cell residuals matches limma;
+  swapping group names, reversing visits, and reordering participants produce
+  exactly the expected counts. Numerical discrepancies are below 3 × 10⁻¹⁵.
+- No observed site lies close enough to a cutoff for the numerical differences
+  between our verified implementations to change its classification. This does
+  not explain the difference from the authors' unspecified implementation.
+- A **separate 9,999-shuffle run with seed 70901** gives 2,623 changes ≥ +18 and
+  **p = 0.2624**, compared with 0.2630 in the original run (Monte Carlo SE about
+  0.0044 in each). The seed was selected before this check was fitted. This checks
+  Monte Carlo stability; it does not validate the unknown diet labels or original
+  model. The runs are reported separately, without replacing or pooling results.
+
+The code review found and fixed one alignment weakness: `prepare_matrices` used
+matrix-column indices as metadata-row positions when retrieving group labels.
+Reordering metadata independently could therefore change labels incorrectly.
+Labels are now aligned explicitly by participant and visit, with checks for a
+one-to-one matrix-column mapping. A regression test covers metadata reordering.
+The production run uses metadata in matrix-column order; the complete replay
+after this fix confirms that its results are unchanged.
+
+The machine-readable evidence is in [audit_summary.json](results/audit/audit_summary.json),
+[independent_limma_counts.csv](results/audit/independent_limma_counts.csv), and
+[full_replay_summary.json](results/audit/full_replay_summary.json). With the full
+local data and R fits available, run `make test` and `make audit` to repeat the
+checks. The independent R audit is implemented in
+[audit_limma.R](scripts/audit_limma.R); [audit_results.py](scripts/audit_results.py)
+checks the source data and orchestrates the fits and isolated replay.
+[audit_invariants.py](scripts/audit_invariants.py) verifies summaries, model
+symmetries, cutoff distances and sample distances; its evidence is saved in
+[invariance_summary.json](results/audit/invariance_summary.json).
+The additional Monte Carlo result and all its paired counts are in
+[independent_seed_summary.json](results/audit/independent_seed_summary.json) and
+[independent_seed_counts.csv](results/audit/independent_seed_counts.csv). Repeat
+that separate check with:
+
+```bash
+OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 .venv/bin/python scripts/audit_results.py --independent-seed 70901
+```
+
+These checks
+start from the deposited processed beta matrix; they do not independently repeat
+the original IDAT normalization or probe filtering.
+
+**Scope of the claim when contacting the authors:** the value 0.2630 is our
+additional test of the reconstructed **count increase**, conditional on the numeric
+grouping, candidate M-value model and unrestricted exchangeability. It does not
+establish an error in any published individual-CpG p-value or refute the study's
+other analyses. The paper itself reports no BH-significant DMPs in this analysis.
+The published change is +24, while we reconstructed +18; our result is not yet
+an exact test of that published change.
+
+The unresolved questions to put to the authors are:
+
+1. Which participant-to-diet mapping was used, and how do the two deposited diet
+   fields and the Table 1 sex counts relate to it? Can the sample identities and
+   pairing be confirmed using the SNP-based QC?
+2. Can they provide the Figure 1B input values, model/design matrix, contrasts,
+   covariates and limma options, together with the before/after DMP tables, to
+   resolve the six-site follow-up discrepancy?
+3. Which randomization blocks and allocation rules apply to the 48 participants
+   in the methylation subset?
 
 The main results and their inputs are directly inspectable:
 

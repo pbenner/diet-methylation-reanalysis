@@ -1,0 +1,14 @@
+{
+  "method": "full replay of current production code in an isolated output directory",
+  "repetitions": 9999,
+  "seed": 70899,
+  "all_paired_counts_equal": true,
+  "original_count_sha256": "31d93f15da6ee2cc634208244ab9e93b7f4eae5ca5445e1a00a5366a9cd71604",
+  "observed_change": 18,
+  "shuffles_ge_observed_change": 2629,
+  "p_upper": 0.263,
+  "elapsed_seconds": 176.8,
+  "numpy_version": "2.5.4",
+  "rng": "numpy.default_rng (PCG64)",
+  "permutation_script_sha256": "d9d4a0137dac0be5524a495414b6048bf4e8e4a561754e26b434dc8a10814e5f"
+}

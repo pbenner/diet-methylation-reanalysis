@@ -107,7 +107,11 @@ def main(scenario='corrected_visits'):
     ax.axvline(obs, color="#c3413b", lw=2, label=f"Observed change: {obs:+d}")
     ax.axvline(change_summary.shuffled_median_change, color="#333333", ls="--", lw=1,
                label=f"Shuffled median: {change_summary.shuffled_median_change:+.0f}")
-    ax.set(xlabel="Change in red-site count (after − before)", ylabel="Number of shuffles")
+    ax.set(xlabel="Change in red-site count (after − before)", ylabel="Number of shuffles",
+           xlim=(-200, 200))
+    outside_view = int(((changes < -200) | (changes > 200)).sum())
+    fig.supxlabel(f"Display range: −200 to 200 · {outside_view:,} changes outside view · "
+                  f"p-value uses all {len(changes):,} shuffles", fontsize=9)
     ax.legend(loc="upper left", fontsize=9)
     ax.text(0.98, 0.96,
             f"Observed: {int(change_summary.observed_before)} → {int(change_summary.observed_after)} ({obs:+d})\n"

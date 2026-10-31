@@ -63,9 +63,11 @@ thresholds are identical at both visits and in every shuffled fit.
 ![Corrected visit-label analysis: observed increase +24 and upper-tail p = 0.1881.](results/corrected_visits/diet_code/null_changes.png)
 
 Each histogram entry is one assignment's **after count minus before count**. The
-red line marks +24; dark bars contain changes ≥ +24, including ties. All 9,999
-changes are included, and the p-value is computed from exact counts independently
-of histogram bins. A [PDF](results/corrected_visits/diet_code/null_changes.pdf) is available.
+red line marks +24; dark bars contain changes ≥ +24, including ties. The x-axis is
+zoomed to −200 to 200; the plot notes how many changes fall outside this view.
+All 9,999 changes contribute to the p-value, which is computed from exact counts
+independently of the displayed range and histogram bins.
+A [PDF](results/corrected_visits/diet_code/null_changes.pdf) is available.
 
 The shuffled median is **+1**, with 2.5th and 97.5th percentiles
 **-91.05 and +95**. These describe the shuffled distribution,

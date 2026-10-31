@@ -1,0 +1,28 @@
+{
+  "group_field": "diet_code",
+  "numerator": "0",
+  "denominator": "1",
+  "annotation_scenario": "corrected_visits",
+  "samples_file": "data/processed/samples_corrected_visits.csv",
+  "samples_sha256": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+  "repetitions": 9999,
+  "seed": 70899,
+  "batch_size": 32,
+  "workers": 4,
+  "tail": "upper: shuffled red-site count >= observed count, including ties",
+  "correction": "(extreme+1)/(B+1)",
+  "observed_counts": {
+    "before": 158,
+    "after": 182
+  },
+  "permutation_unit": "participant; one assignment shared by both visits and every CpG",
+  "variance_prior": "re-estimated across all sites for each permutation",
+  "saved_count_rule": "limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
+  "count_test": "run scripts/count_test.py to test for an excess of red sites",
+  "model": "unblocked four group-by-time means; structure and moderation confirmed by author clarification",
+  "assumption": "unrestricted participant exchangeability, conditional on group counts; allocation blocks unavailable",
+  "status": "provisional: numeric grouping retained; verified diet mapping and allocation blocks unavailable",
+  "minimum_count_p": 0.0001,
+  "observed_df_prior": 3.878350692348234,
+  "observed_s2_prior": 0.03425607294251067
+}

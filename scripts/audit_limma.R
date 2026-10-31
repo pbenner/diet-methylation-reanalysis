@@ -6,7 +6,11 @@ stopifnot(as.character(packageVersion("limma")) == "3.54.0")
 args <- commandArgs(trailingOnly=TRUE)
 assignments <- read.csv(args[1], check.names=FALSE, colClasses="character")
 out <- args[2]
-samples <- read.csv("data/processed/samples.csv", colClasses=c(participant="character", diet_code="character"))
+scenario <- if(length(args)>=3) args[3] else "deposited"
+stopifnot(scenario %in% c("deposited","corrected_visits"))
+sample_file <- if(scenario=="corrected_visits") "samples_corrected_visits.csv" else "samples.csv"
+result_dir <- if(scenario=="corrected_visits") "results/corrected_visits/diet_code" else "results/diet_code"
+samples <- read.csv(file.path("data/processed",sample_file), colClasses=c(participant="character", diet_code="character"))
 cpg <- readLines("data/processed/cpg_ids.txt")
 beta <- matrix(readBin("data/processed/beta.bin", "double", n=length(cpg)*nrow(samples),
                        size=8, endian="little"), nrow=length(cpg), byrow=TRUE)
@@ -14,7 +18,7 @@ M <- log2(beta/(1-beta))
 rm(beta)
 visit <- factor(samples$time, levels=c(0,1))
 observed <- lapply(c("before", "after"), function(time)
-    read.csv(gzfile(file.path("results/diet_code", paste0(time,"_limma.csv.gz")))))
+    read.csv(gzfile(file.path(result_dir, paste0(time,"_limma.csv.gz")))))
 ans <- list()
 for (i in seq_len(nrow(assignments))) {
     diet <- factor(as.character(unlist(assignments[i, match(samples$participant, names(assignments))])),

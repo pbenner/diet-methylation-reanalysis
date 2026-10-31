@@ -4,6 +4,7 @@ Distance checks are descriptive QC, not a verification of biological identity.
 The original labels and all primary results remain unchanged.
 """
 import json
+import argparse
 
 import numpy as np
 import pandas as pd
@@ -11,6 +12,7 @@ from scipy import stats
 
 from audit_results import ROOT, sha256, validate_saved_summaries
 from permutation import moderated_t, prepare_matrices
+from scenarios import paths, result_base, add_argument
 
 
 def direct_fit(matrices, labels):
@@ -68,14 +70,14 @@ def pair_distances(beta, samples):
     return table, info
 
 
-def main():
-    folder = ROOT/'results/diet_code'
-    out = ROOT/'results/audit'
+def main(scenario='corrected_visits'):
+    sample_path, folder = paths(ROOT, 'diet_code', scenario)
+    out = result_base(ROOT, scenario)/'audit'
     out.mkdir(exist_ok=True)
     consistency = validate_saved_summaries(folder)
     shape = tuple(json.loads((ROOT/'data/processed/audit.json').read_text())['matrix_shape'])
     beta = np.memmap(ROOT/'data/processed/beta.bin', dtype='<f8', mode='r', shape=shape)
-    samples = pd.read_csv(ROOT/'data/processed/samples.csv',
+    samples = pd.read_csv(sample_path,
                           dtype={'participant':str, 'diet_code':str})
     samples['matrix_index'] = np.arange(len(samples))
     matrices, labels, _ = prepare_matrices(beta, samples, 'diet_code')
@@ -105,6 +107,8 @@ def main():
     table, pair_info = pair_distances(beta, samples)
     table.to_csv(out/'pair_distance_check.csv', index=False)
     report = {
+        'annotation_scenario':scenario,
+        'samples_sha256':sha256(sample_path),
         'summary_consistency':consistency,
         'direct_residual_fit_matches_saved_limma':True,
         'invariances':invariances,
@@ -121,4 +125,6 @@ def main():
 
 
 if __name__=='__main__':
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    add_argument(parser)
+    main(parser.parse_args().scenario)

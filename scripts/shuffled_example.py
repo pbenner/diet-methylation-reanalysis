@@ -11,12 +11,13 @@ import subprocess
 
 import numpy as np
 import pandas as pd
+from scenarios import paths, add_argument
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def run(seed=None, force=False):
-    folder = ROOT / "results/diet_code"
+def run(seed=None, force=False, scenario='corrected_visits'):
+    sample_path, folder = paths(ROOT, 'diet_code', scenario)
     out = folder / "shuffled_example"
     metadata = json.loads((folder / "permutation_run.json").read_text())
     if metadata["group_field"] != "diet_code":
@@ -30,8 +31,9 @@ def run(seed=None, force=False):
         raise ValueError("The shuffling seed must be nonnegative")
     sources = [
         "scripts/shuffled_example.py", "scripts/figure1b_limma.R", "scripts/run_r.sh",
-        "data/processed/audit.json", "data/processed/samples.csv", "data/processed/cpg_ids.txt",
-        "results/diet_code/permutation_run.json", "results/diet_code/permutation_null_counts.csv",
+        "data/processed/audit.json", str(sample_path.relative_to(ROOT)), "data/processed/cpg_ids.txt",
+        str((folder/"permutation_run.json").relative_to(ROOT)),
+        str((folder/"permutation_null_counts.csv").relative_to(ROOT)),
     ]
     fingerprints = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in sources}
     matrix = (ROOT / "data/processed/beta.bin").stat()
@@ -43,7 +45,7 @@ def run(seed=None, force=False):
         print(f"Reusing the R/limma fit for example seed {seed}.")
         return
 
-    samples = pd.read_csv(ROOT / "data/processed/samples.csv",
+    samples = pd.read_csv(sample_path,
                           dtype={"participant": str, "diet_code": str})
     if not samples.groupby("participant").time.apply(lambda x: sorted(x) == [0, 1]).all():
         raise ValueError("Expected one before and one after sample per participant")
@@ -61,7 +63,7 @@ def run(seed=None, force=False):
     assignments.to_csv(out / "assignments.csv", index=False)
     subprocess.run(["bash", str(ROOT / "scripts/run_r.sh"),
                     str(ROOT / "scripts/figure1b_limma.R"), "diet_code",
-                    str(out / "assignments.csv")], cwd=ROOT, check=True)
+                    str(out / "assignments.csv"), scenario], cwd=ROOT, check=True)
 
     actual = pd.read_csv(out / "limma_summary.csv").set_index("time")
     for time in ("before", "after"):
@@ -79,7 +81,7 @@ def run(seed=None, force=False):
             if int(actual.loc[time, "highlighted"]) != int(expected[time]):
                 raise ValueError(f"{time}: independent R count differs from saved shuffle #1")
         verification += "; both counts also match the first saved count-test assignment"
-    report = {"inputs": inputs, "shuffle_number": 1, "seed": seed,
+    report = {"inputs": inputs, "shuffle_number": 1, "seed": seed, "annotation_scenario": scenario,
         "selection": "first assignment from the specified seed; seed selected before fitting",
         "method": "same R limma 3.54.0 model and thresholds as the observed fit",
         "p_values": "two-sided limma p-values fitted to this one shuffled grouping",
@@ -93,7 +95,8 @@ def run(seed=None, force=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    add_argument(parser)
     parser.add_argument("--seed", type=int, help="Seed for the example only; defaults to the last selected example seed")
     parser.add_argument("--force", action="store_true", help="Refit even when the inputs match the saved example")
     args = parser.parse_args()
-    run(seed=args.seed, force=args.force)
+    run(seed=args.seed, force=args.force, scenario=args.scenario)

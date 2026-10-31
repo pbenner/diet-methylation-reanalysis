@@ -1,5 +1,6 @@
 """Produce shareable plots without subsampling or changing significance rules."""
 import os
+import argparse
 import json
 os.environ.setdefault("MPLCONFIGDIR", "/tmp/vegandiet-matplotlib")
 import matplotlib
@@ -8,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from pathlib import Path
+from scenarios import paths, add_argument
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -26,8 +28,9 @@ def draw_volcano(ax, data, title, xlabel):
     return int(hit.sum())
 
 
-def main():
-    out = ROOT / "results/diet_code"
+def main(scenario='corrected_visits'):
+    _, out = paths(ROOT, 'diet_code', scenario)
+    annotation_label = 'Visits corrected for donors 5 and 8' if scenario=='corrected_visits' else 'Original deposited visits'
     summary = pd.read_csv(out/"count_test_summary.csv").set_index("time")
     observed = {t: pd.read_csv(out/f"{t}_limma.csv.gz", usecols=["logFC", "P.Value"])
                 for t in ("before", "after")}
@@ -41,7 +44,7 @@ def main():
                              "Mean M-value difference: code 0 − code 1")
         if count != int(row.observed_count):
             raise ValueError(f"{time}: count-test summary does not match observed volcano points")
-    fig.suptitle("Observed Figure 1B reconstruction · numeric group codes", fontsize=12)
+    fig.suptitle(f"Observed Figure 1B reconstruction · numeric group codes\n{annotation_label}", fontsize=12)
     fig.savefig(out/"figure1b_observed.png", dpi=180)
     fig.savefig(out/"figure1b_observed.pdf", dpi=180)
     plt.close(fig)
@@ -62,7 +65,7 @@ def main():
         if count != expected:
             raise ValueError(f"{time}: example volcano does not match its saved R fit")
     fig.suptitle("Observed groups and one shuffled grouping · Figure 1B reconstruction\n"
-                 "Unrestricted participant shuffle · original blocks unavailable",
+                 f"{annotation_label} · unrestricted shuffle · original blocks unavailable",
                  fontsize=12)
     fig.savefig(out/"figure1b_observed_and_shuffled.png", dpi=180)
     fig.savefig(out/"figure1b_observed_and_shuffled.pdf", dpi=180)
@@ -82,7 +85,7 @@ def main():
         ax.set(title=f"{time.title()} · upper-tail count p = {row.count_p_upper:.4f}",
                xlabel="Red sites: limma raw p < 0.05 and |ΔM| > 0.5", ylabel="Number of shuffles")
         ax.legend(fontsize=8)
-    fig.suptitle(f"Is the observed red-site count unusually large?\n{len(null):,} unrestricted participant shuffles · original blocks unavailable", fontsize=12)
+    fig.suptitle(f"Is the observed red-site count unusually large?\n{annotation_label} · {len(null):,} unrestricted participant shuffles", fontsize=12)
     fig.savefig(out/"null_counts.png", dpi=180)
     fig.savefig(out/"null_counts.pdf", dpi=180)
     plt.close(fig)
@@ -113,11 +116,13 @@ def main():
             transform=ax.transAxes, ha="right", va="top", fontsize=11,
             bbox={"boxstyle": "round,pad=0.5", "facecolor": "white", "edgecolor": "#bfc8ce"})
     fig.suptitle(f"Is the increase of {obs:+d} red sites unusually large?\n"
-                 f"{len(changes):,} paired count changes · unrestricted shuffles · original blocks unavailable", fontsize=12)
+                 f"{annotation_label} · {len(changes):,} unrestricted shuffles", fontsize=12)
     fig.savefig(out/"null_changes.png", dpi=180)
     fig.savefig(out/"null_changes.pdf", dpi=180)
     plt.close(fig)
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    add_argument(parser)
+    main(parser.parse_args().scenario)

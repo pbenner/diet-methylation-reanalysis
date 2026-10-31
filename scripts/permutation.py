@@ -5,6 +5,7 @@ robust=False. Variance priors are re-estimated across all sites each shuffle.
 Original randomization blocks are unavailable: these shuffles are unrestricted.
 """
 import argparse
+import hashlib
 import json
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -12,6 +13,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy import special, stats
+from scenarios import paths, add_argument
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -99,14 +101,14 @@ def prepare_matrices(beta, samples, field):
     return matrices, labels, groups
 
 
-def run(field, repetitions, seed, batch_size, workers=4):
+def run(field, repetitions, seed, batch_size, workers=4, scenario='corrected_visits'):
     if repetitions < 1 or batch_size < 1 or workers < 1:
         raise ValueError("Repetitions, batch size, and workers must be positive")
-    out = ROOT / "results" / field
+    sample_path, out = paths(ROOT, field, scenario)
     audit = json.loads((ROOT / "data/processed/audit.json").read_text())
     shape = tuple(audit["matrix_shape"])
     beta = np.memmap(ROOT / "data/processed/beta.bin", dtype="<f8", mode="r", shape=shape)
-    samples = pd.read_csv(ROOT / "data/processed/samples.csv", dtype={"participant": str, "diet_code": str})
+    samples = pd.read_csv(sample_path, dtype={"participant": str, "diet_code": str})
     samples["matrix_index"] = np.arange(len(samples))
     matrices, labels, groups = prepare_matrices(beta, samples, field)
     n = len(labels)
@@ -161,6 +163,9 @@ def run(field, repetitions, seed, batch_size, workers=4):
                 print(f"{field}: {start+size}/{repetitions} permutations", flush=True)
     pd.DataFrame(null_counts, columns=["before", "after"]).to_csv(out / "permutation_null_counts.csv", index=False)
     metadata = {"group_field": field, "numerator": groups[0], "denominator": groups[1],
+        "annotation_scenario": scenario,
+        "samples_file": str(sample_path.relative_to(ROOT)),
+        "samples_sha256": hashlib.sha256(sample_path.read_bytes()).hexdigest(),
         "repetitions": repetitions, "seed": seed, "batch_size": batch_size, "workers": workers,
         "tail": "upper: shuffled red-site count >= observed count, including ties",
         "correction": "(extreme+1)/(B+1)",
@@ -169,9 +174,9 @@ def run(field, repetitions, seed, batch_size, workers=4):
         "variance_prior": "re-estimated across all sites for each permutation",
         "saved_count_rule": "limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
         "count_test": "run scripts/count_test.py to test for an excess of red sites",
-        "model": "unblocked four group-by-time means, matching candidate original model",
+        "model": "unblocked four group-by-time means; structure and moderation confirmed by author clarification",
         "assumption": "unrestricted participant exchangeability, conditional on group counts; allocation blocks unavailable",
-        "status": "provisional: conflicting deposited diet labels and missing author analysis code",
+        "status": "provisional: numeric grouping retained; verified diet mapping and allocation blocks unavailable",
         "minimum_count_p": 1/(repetitions+1), "observed_df_prior": prior_df, "observed_s2_prior": scale}
     (out / "permutation_run.json").write_text(json.dumps(metadata, indent=2)+"\n")
     print(f"Saved {repetitions:,} paired red-site counts to {out / 'permutation_null_counts.csv'}")
@@ -179,10 +184,11 @@ def run(field, repetitions, seed, batch_size, workers=4):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    add_argument(parser)
     parser.add_argument("--group-field", choices=["diet_code", "diet_named"], default="diet_code")
     parser.add_argument("--permutations", type=int, default=9999)
     parser.add_argument("--seed", type=int, default=70899)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--workers", type=int, default=4)
     args = parser.parse_args()
-    run(args.group_field, args.permutations, args.seed, args.batch_size, args.workers)
+    run(args.group_field, args.permutations, args.seed, args.batch_size, args.workers, args.scenario)

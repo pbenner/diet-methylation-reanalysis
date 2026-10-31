@@ -1,0 +1,12 @@
+{
+  "recorded_on": "2026-10-31",
+  "source": "Author clarification supplied to the project owner and shared for this reanalysis; the private email is not reproduced.",
+  "correction": "Reverse the two time labels for each of deposited participant IDs 5 and 8 (four sample rows).",
+  "interpretation": "The author's donor numbers are interpreted as the deposited participant IDs; the four explicit array IDs are recorded in visit_labels.csv.",
+  "model_clarification": "Initial model: four group-by-time means on M-values, lmFit, contrasts.fit and default eBayes; decideTests with adjust.method=none, p.value=0.05 and lfc=0.5.",
+  "author_report": "The author reports that the analysis metadata were correct and the errors arose during manual deposition; the published counts were reproduced with those original analysis metadata.",
+  "sex": "The author confirms sex annotation errors and totals of 30 women and 18 men, but has not supplied individual corrections; deposited sex labels are retained and are not used by the Figure 1B model.",
+  "diet": "Numeric 24/24 grouping is retained. A verified participant-to-diet mapping and resolution of the conflicting named diet field are still needed.",
+  "allocation": "Original participant-to-randomization-block mapping remains unavailable; permutations are unrestricted.",
+  "scope": "Local correction of the archived public annotations, not a replacement sample sheet downloaded from the author or BioStudies."
+}

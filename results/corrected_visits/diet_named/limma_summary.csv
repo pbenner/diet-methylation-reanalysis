@@ -1,0 +1,3 @@
+"time","numerator","denominator","n_numerator","n_denominator","highlighted","bh_below_005","df_residual","df_prior","s2_prior","df_total"
+"before","Vegan Diet","Meat-rich Diet",26,22,616,1,92,3.87941974926789,0.0340889615486418,95.8794197492679
+"after","Vegan Diet","Meat-rich Diet",26,22,545,0,92,3.87941974926789,0.0340889615486418,95.8794197492679

@@ -1,0 +1,15 @@
+{
+  "annotation_scenario": "corrected_visits",
+  "samples_sha256": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+  "method": "independent Monte Carlo check; seed specified before fitting",
+  "repetitions": 9999,
+  "seed": 70901,
+  "original_count_sha256": "b0eb9a5deda3c454dd285b065dff32ccb1a340772f465c10d36b2f62b65ebde3",
+  "observed_change": 24,
+  "shuffles_ge_observed_change": 1858,
+  "p_upper": 0.1859,
+  "elapsed_seconds": 155.6,
+  "numpy_version": "2.5.4",
+  "rng": "numpy.default_rng (PCG64)",
+  "permutation_script_sha256": "bb6c725ff42ab02ae68fd7529c381792a3d02d02c8da3c188f844288daf7bb66"
+}

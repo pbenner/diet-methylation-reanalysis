@@ -1,299 +1,234 @@
 # Figure 1B: is the increase in red-site counts unusual?
 
-This project reconstructs the methylation comparisons in Figure 1B of
-[Karbacher et al., DOI 10.1002/mco2.70899](https://onlinelibrary.wiley.com/doi/10.1002/mco2.70899).
-The main question is whether the increase from **158 red sites before to 176 after
-(+18)** is unusually large when participants are randomly reassigned to groups.
+This project reconstructs Figure 1B of
+[Karbacher et al., DOI 10.1002/mco2.70899](https://onlinelibrary.wiley.com/doi/10.1002/mco2.70899)
+and tests the after-minus-before change in the number of highlighted CpG sites
+using joint participant-label shuffles.
 
-> **Main result for our candidate reconstruction:** Among 9,999 participant-label shuffles preserving each person's
-> before/after samples, 2,629 produced an increase of at least +18 red sites.
-> The one-sided permutation p-value is **0.2630**. The observed increase is therefore
-> not unusual under this unrestricted shuffling scheme.
+> **Updated result, 31 October 2026:** After correcting the reversed visit labels
+> for donors 5 and 8, the reconstruction gives **158 sites before and 182 after
+> (+24)**, matching the published counts. Of **9,999 newly fitted shuffles**,
+> **1,880** produced an increase of at least +24. The one-sided
+> permutation p-value is **0.1881**.
 
-This conclusion concerns the increase in the number of sites passing the figure's
-thresholds. It does not establish that the diets are equivalent or that methylation
-is unaffected. The reconstruction is provisional: the public diet annotations
-conflict, the original randomization blocks are unavailable, and the authors'
-Figure 1B analysis code is not included in the deposit.
+The increase is not unusual under this unrestricted shuffling scheme. This is an
+exploratory count-change diagnostic, conditional on the retained numeric grouping;
+it does not establish absence of a diet effect or an error in individual published
+CpG p-values. Verified diet assignments and original allocation blocks remain
+unavailable.
 
-Open the executed [results notebook](notebooks/figure1b_results.ipynb) or its
-[HTML reading copy](notebooks/figure1b_results.html) for the calculations, histogram,
-volcano plots, annotation audit, and an editable individual-CpG example. Running all
-notebook cells reads and checks saved results; it does not repeat thousands of model fits.
+Read the executed [results notebook](notebooks/figure1b_results.ipynb) or its
+[HTML copy](notebooks/figure1b_results.html). **Run All** checks saved results and
+renders explanations; it does not refit thousands of permutations.
+
+## What changed and what is preserved
+
+An author clarified that the deposited time labels for donors 5 and 8 were reversed,
+and supplied the initial limma model. Applying those four explicit label changes
+resolves the six-site follow-up count discrepancy. The author reports that the
+metadata used for the publication were correct and that the errors arose during
+deposition. We have not received the complete corrected sample sheet.
+
+The [correction note](docs/annotation_correction.md) records the four array IDs,
+provenance, model clarification and remaining limitations. The
+[patch](data/corrections/visit_labels.csv) produces
+[samples_corrected_visits.csv](data/processed/samples_corrected_visits.csv), with
+[input/output hashes](data/processed/visit_correction.json). Only the time field
+changes: measurements, participant IDs, matrix order, numeric grouping and sex
+annotations are retained. Individual sex corrections were not supplied; sex is
+not used by the initial Figure 1B model.
+
+The public annotation files were still identical to our archived copies when
+[checked on 31 October 2026](data/corrections/public_annotation_check.json).
+This is therefore a documented **local correction**, not an updated public release.
+
+| Analysis | Before | After | Change | Count-change p |
+| --- | ---: | ---: | ---: | ---: |
+| Manuscript | 158 | 182 | +24 | Not reported for this added test |
+| Original deposited visits | 158 | 176 | +18 | 0.2630 |
+| **Corrected visits, current analysis** | **158** | **182** | **+24** | **0.1881** |
+
+Current outputs are in **`results/corrected_visits/`**. Original outputs in
+`results/diet_code/`, `results/diet_named/` and `results/audit/` remain unchanged.
+The previous README and notebook are available in
+[commit b7cccf8](https://github.com/pbenner/diet-methylation-reanalysis/tree/b7cccf8cf00b811d666af29c5194aeece418684f).
+The historical p-value 0.2630 refers to the old visit labels and +18 statistic.
 
 ## Main result and histogram
 
-A CpG site is a measured DNA location. Here, a site is **red** when its between-group
-comparison meets both rules: **raw limma p < 0.05 and abs(logFC) > 0.5**. The same
-rules apply before and after, and to every shuffled grouping. The effect scale and
-limma calculation are explained below.
+A CpG is a measured DNA location. A site is highlighted in red when its between-group
+comparison passes **raw two-sided limma p < 0.05 and abs(logFC) > 0.5**. These
+thresholds are identical at both visits and in every shuffled fit.
 
-| Analysis | Before | After | After − before |
-| --- | ---: | ---: | ---: |
-| Manuscript | 158 | 182 | +24 |
-| Numeric-label reconstruction used here | 158 | 176 | **+18** |
+![Corrected visit-label analysis: observed increase +24 and upper-tail p = 0.1881.](results/corrected_visits/diet_code/null_changes.png)
 
-We test the reconstructed change of +18 so that the observed and shuffled counts
-come from the same analysis. The baseline count matches the paper; the follow-up
-count differs by six. Matching a count does not verify the identities of the sites
-or the meaning of the group codes.
+Each histogram entry is one assignment's **after count minus before count**. The
+red line marks +24; dark bars contain changes ≥ +24, including ties. All 9,999
+changes are included, and the p-value is computed from exact counts independently
+of histogram bins. A [PDF](results/corrected_visits/diet_code/null_changes.pdf) is available.
 
-![Histogram of 9,999 paired count changes; the observed increase is +18 and the upper-tail p-value is 0.2630.](results/diet_code/null_changes.png)
+The shuffled median is **+1**, with 2.5th and 97.5th percentiles
+**-91.05 and +95**. These describe the shuffled distribution,
+not a confidence interval for a diet effect. The approximate Monte Carlo standard
+error is **0.0039**.
 
-The horizontal axis is the **after count minus the before count for one shuffle**;
-the vertical axis is the number of shuffles in each interval. Positive values mean
-more red sites after; negative values mean fewer. The red line marks the observed
-+18. Dark bars contain changes of +18 or more, including ties. All 9,999 changes
-are included. The p-value uses the exact counts, so it does not depend on histogram
-bin width. A [PDF copy](results/diet_code/null_changes.pdf) is also available.
+## How the permutation test works
 
-The shuffled median change is **+2**, and the 2.5th and 97.5th percentiles are
-**−88 and +94**. These describe the shuffled distribution; they are not a confidence
-interval for a diet effect. The approximate Monte Carlo standard error of the
-p-value is **0.0044**, reflecting the finite number of sampled assignments.
+The analysis covers **812,934 CpGs, 48 participants and two visits per person**.
+For each of **9,999 shuffles with seed 70899**:
 
-## How the change test works
-
-The analysis includes **812,934 CpGs, 48 participants, and two visits per person**.
-The saved run uses **9,999 shuffles with seed 70899**. For each shuffle:
-
-1. Keep all methylation measurements fixed.
-2. Randomly reassign the 48 participants to two groups of 24.
-3. Use the **same assignment for both visits and every CpG**. Each person's paired
-   samples stay together, and relationships between CpGs are preserved.
-4. Refit the same four group-by-visit means and re-estimate limma's empirical Bayes
-   variance prior across all sites. Apply the same raw-p and effect thresholds.
-5. Count red sites before and after, then subtract **within that assignment**.
-
-Writing these two counts as `C_before` and `C_after`, the statistic is:
+1. Keep methylation measurements and the corrected visit assignments fixed.
+2. Randomly reassign participants to two groups of 24.
+3. Use the **same assignment for both visits and every CpG**.
+4. Refit the four group-by-visit means and re-estimate the empirical Bayes variance
+   prior across all sites. Apply the same raw-p and effect thresholds.
+5. Count red sites at each visit, then subtract within that assignment.
 
 ```text
-D_observed = 176 − 158 = +18
-D_b        = C_after,b − C_before,b          for shuffle b
-
-p_increase = (1 + number of D_b ≥ D_observed) / (B + 1)
-           = (1 + 2629) / (9999 + 1)
-           = 0.2630
+D_observed = 182 − 158 = +24
+D_b        = C_after,b − C_before,b
+p_increase = (1 + number of D_b ≥ 24) / (9999 + 1)
+           = (1 + 1880) / 10000
+           = 0.1881
 ```
 
 The +1 correction includes the observed assignment in the Monte Carlo comparison
-and prevents a zero p-value from a finite sample of shuffles. Ties are included.
-This is a **one-sided test of an increase**: decreases, even large ones, are not
-in its upper tail. The limma tests defining which sites are red remain two-sided.
-Testing unusually large count changes in either direction would be a different question.
+and prevents zero p-values from finite sampling. This is a **one-sided test of an
+increase**; the limma tests defining red sites remain two-sided. Approximately
+18.8% of assignments yield an increase at least as large. This is not the
+probability that the null hypothesis is true or that there is no diet effect.
 
-About **26.3%** of sampled assignments produced an increase at least this large.
-That is the relevant tail probability under the stated shuffling scheme. It is
-not the probability that the null hypothesis is true or that there is no diet effect.
+Each shuffle uses its own before count. The test is not conditional on starting
+at exactly 158, and it does not estimate the probability of exactly 158 → 182.
+A net increase of 24 can involve sites entering and leaving the red set. Because
+the red rule uses the absolute effect, more red sites does not itself mean higher
+methylation.
 
-Each shuffle has its **own before count**. We do not condition on that count being
-158, and we do not estimate the probability of exactly the pair 158 → 176. We also
-do not shuffle visits separately or subtract counts from different assignments.
-A net increase of 18 can reflect sites entering and leaving the red set; it need
-not mean that exactly 18 new sites became red. Because the red rule uses the absolute
-effect, a larger red count does not itself mean higher methylation.
+The current run repeats **every shuffled fit** with corrected visits; it does not
+reuse the old counts with a new cutoff. Using the same seed and numeric grouping
+preserves the participant assignments across the historical and current runs.
+The statistic and upper-tail direction were chosen during exploratory review,
+before this correction, rather than before examining any data.
 
-The 9,999 before/after count pairs were already saved by the full model-fitting run.
-The change test reuses those paired rows without any new shuffles. Its code is in
-[scripts/change_test.py](scripts/change_test.py). The statistic and upper-tail
-direction were chosen during exploratory review, rather than specified before
-examining the results.
+## Model, effect scale and assumptions
 
-## What the shuffling assumes
-
-The calculation assumes that whole participant methylation profiles can be
-reassigned between groups while retaining group sizes of 24/24. This is the
-**unrestricted exchangeability assumption**: under the reference model, the observed
-assignment is comparable with these shuffled assignments. It preserves dependence
-between CpGs and visits and does not require the CpGs to be independent.
-The null applies to whole before/after profiles. Equal average changes between
-groups alone are insufficient to justify these shuffles. Subtracting the baseline
-red count does not make this a general test of a diet-by-time interaction.
-
-The [original trial methods](https://doi.org/10.3390/microorganisms9040727) report
-block randomization with block size 13. The public methylation annotations do not
-supply participant-to-block membership. No blocks are inferred from participant
-IDs or sample order. Consequently, this is an **unrestricted diagnostic**, not an
-exact randomization test under the documented trial allocation.
-
-Verified diet assignments, block membership, the allocation procedure for the
-48-person methylation subset, and the authors' Figure 1B script are needed for an
-exact reproduction. The current test evaluates a change in thresholded-site counts;
-it neither identifies individual diet effects nor tests a diet-by-time interaction
-at individual CpGs. A large p-value does not establish absence of such effects.
-
-## What limma and the site-level p-values mean
-
-**limma** is an R/Bioconductor package for fitting linear models to many measured
-features. Here, each feature is a CpG. It estimates the group difference at each
-site and uses **empirical Bayes variance moderation**: information across sites
-helps stabilize each site's variance estimate.
-
-The candidate model transforms each beta value, a methylation measurement between
-0 and 1, to an M-value:
+**limma** is an R/Bioconductor package for linear models across many features. Its
+empirical Bayes moderation uses information across CpGs to stabilize site-specific
+variance estimates. We use limma **3.54.0** with default `eBayes` settings:
+`trend=FALSE`, `robust=FALSE`.
 
 ```text
 M     = log2(beta / (1 − beta))
-logFC = mean(M in code 0) − mean(M in code 1)    at the same visit
+logFC = mean(M in code 0) − mean(M in code 1), at the same visit
 ```
 
-Thus `logFC` is a difference in mean M-values, or a log2 ratio of geometric mean
-methylation odds. It is not a change in methylation percentage points or the log2
-ratio of arithmetic mean beta values. M-values are an explicit reconstruction
-assumption; the figure label alone does not establish the authors' input scale.
-See the [minfi reference](https://bioconductor.org/packages/release/bioc/manuals/minfi/man/minfi.pdf)
-for the beta and M scales.
+The effect is a difference in mean M-values: a log2 ratio of geometric mean
+methylation odds. It is not a methylation percentage-point change or a ratio of
+arithmetic mean beta values. We derive M-values from the public processed matrix;
+the author's original M-value matrix and site-by-site results are not yet available.
 
-The model fits four means: two groups at each of two visits. It compares code 0
-with code 1 separately before and after, pooling residual variance across visits.
-There are 92 residual degrees of freedom. We use limma 3.54.0 with
-`eBayes(trend=FALSE, robust=FALSE)` and no participant blocking. Each site receives
-a moderated t statistic, its fitted difference divided by its moderated standard
-error. Its raw two-sided p-value is the probability of a t statistic at least as
-large in absolute value under limma's reference t distribution, with degrees of
-freedom incorporating the variance moderation. These are model-based p-values.
-See the [limma guide](https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf).
+The author confirmed the initial **unblocked four group-by-time model** and supplied
+five contrasts: within-group visit changes, between-group differences at each visit,
+and their interaction. Our R script includes these contrasts and checks that
+`decideTests(adjust.method="none", p.value=0.05, lfc=0.5)` gives exactly the same red
+sites as our threshold rule. The two between-group contrasts are used for Figure 1B.
+There are 92 residual degrees of freedom, pooling residual variance across visits.
+The author's later age/sex-adjusted model with participant blocking is outside this
+analysis.
 
-The red-site rule uses these **raw** limma p-values. Benjamini–Hochberg (BH)
-adjustments are also computed across all CpGs at each visit, before applying the
-effect threshold. **No sites have BH-adjusted p < 0.05 in the numeric grouping.**
-Red points therefore represent the figure's thresholded comparisons, not a set of
-genome-wide discoveries after multiple-testing correction.
+The site-level p-values come from moderated t statistics and their reference t
+distribution. They are different from the single permutation p-value for the count
+change. **No numeric-group CpGs have BH-adjusted p < 0.05** in either corrected visit
+comparison. Red points are thresholded raw-p results, not genome-wide discoveries.
 
-The permutation p-value of **0.2630** is a separate calculation for the **change
-in red-site counts**. It does not replace the limma p-values for individual sites.
-The shuffles preserve each person's two visits, but the underlying limma model
-does not explicitly model their correlation. The later subject-blocked analysis
-mentioned in the paper is not reconstructed here.
+The shuffles assume **joint exchangeability of whole participant profiles**,
+conditional on group sizes. They preserve both within-person and between-CpG
+dependence. Equal average changes alone do not justify this assumption, and
+subtracting counts does not make this a general test of a diet-by-time interaction.
 
-## Supporting plots and checks
+The [original trial](https://doi.org/10.3390/microorganisms9040727) reports block
+randomization with block size 13. Participant-to-block membership and the subset's
+allocation procedure are unavailable. No blocks are inferred from participant IDs.
+Consequently this remains an **unrestricted diagnostic**, not an exact test under
+the original blocked allocation.
 
-The [volcano figure](results/diet_code/figure1b_observed_and_shuffled.png) has observed
-groups in the first row and one shuffled grouping in the second. Every point is a
-CpG; the axes show its fitted M-value difference and `−log10(raw limma p)`. Both rows
-use the same model and highlighting thresholds. The lower row contains limma
-p-values fitted to that one assignment; the histogram above uses all 9,999 assignments.
+## Group labels and other remaining questions
 
-The current illustrated assignment uses **seed 70900** and gives **227 before and
-202 after (−25)**. It is the first assignment generated from that seed, selected
-before fitting. Its seed is independent of the full run's seed 70899. The first
-assignment from the full run gave 381 and 340 (−41); that earlier example and its
-plot are archived. A single shuffled grouping is a visual check, while the full
-distribution supplies the main result. After changing the example seed, consult
-[its saved metadata](results/diet_code/shuffled_example/run.json) for the current counts.
+The archived public annotations contain conflicting group fields:
 
-For context, separate upper-tail tests of the count at each visit give:
-
-| Visit | Observed red sites | Shuffled median | Shuffles with count ≥ observed | Count p |
-| --- | ---: | ---: | ---: | ---: |
-| Before | 158 | 200 | 9,334 / 9,999 | 0.9335 |
-| After | 176 | 203 | 8,072 / 9,999 | 0.8073 |
-
-These secondary diagnostics use `(1 + extreme counts) / (B + 1)` and are displayed
-in the [count histograms](results/diet_code/null_counts.png). They test an excess
-at each visit, rather than the increase between visits. Their p-values are reported
-separately without an across-visit adjustment.
-
-Fitting visits separately gives 160 and 177 red sites. Using the conflicting named
-diet annotations in the four-mean model gives 668 and 502, with one BH-adjusted
-p-value below 0.05 at each visit. These are sensitivity analyses of model and label
-choices, not additional validated diet findings.
-
-## Data and unresolved group labels
-
-The public deposit is [E-MTAB-17025](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-17025).
-The processed `b_values4.txt` file is 1,494,040,132 bytes. Its separator is the
-literal string `/t`, not a tab. [prepare_data.py](scripts/prepare_data.py) validates
-the entire matrix, matches array IDs, collapses red/green annotation rows, checks
-participant pairing, and writes a float64 binary matrix. Missing, nonfinite or
-out-of-range values cause a failure rather than silent dropping or imputation.
-File hashes are recorded in `data/raw/manifest.json` and `data/processed/audit.json`.
-
-The deposited numeric and named diet fields give the following participant counts:
-
-| Numeric diet code | Named vegan | Named meat-rich | Total |
+| Numeric code | Named vegan | Named meat-rich | Total |
 | --- | ---: | ---: | ---: |
 | 0 | 11 | 13 | 24 |
 | 1 | 15 | 9 | 24 |
 | Total | 26 | 22 | 48 |
 
-Both fields remain constant within each person's two visits, but they do not encode
-the same assignment. The main analysis uses **code 0 minus code 1**, without
-translating the codes into diet names. The named groups are a separate sensitivity
-analysis, vegan minus meat-rich. No grouping is chosen by whether it recovers the
-published count. These unresolved labels limit interpretation of all results.
+The author confirms that the analyzed groups should contain 24 participants each.
+This supports checking the numeric grouping, but does not independently verify
+its participant assignments or the correspondence of codes to diet names. Effects
+are therefore still labeled **code 0 minus code 1**. Matching both published counts
+does not verify site identities or diet mapping.
 
-There is also a discrepancy in the reported sex composition. The deposited
-annotations contain **16 men and 32 women**, with **8 men and 16 women in each
-numeric group**. Table 1 of the paper reports **7 men/17 women in the vegan group
-and 11 men/13 women in the meat-rich group** (18 men in total). Relabeling the
-numeric groups cannot resolve this difference in totals. The current public
-annotation files match our downloaded copies, as recorded in
-[the metadata verification](results/audit/public_metadata_verification.json).
-This warrants clarification about the annotations and analyzed cohort; it does
-not establish which source is incorrect. See [Table 1](https://onlinelibrary.wiley.com/doi/10.1002/mco2.70899)
-and the [computed public sex counts](results/audit/public_sex_counts.csv).
+The author also confirms sex-annotation errors and totals of 30 women/18 men.
+The archived labels contain 32 women/16 men. We do not infer individual corrections.
+The complete corrected sample sheet, verified diet mapping, allocation blocks and
+original CpG tables would resolve the remaining reproduction questions.
 
-As an additional diagnostic, we compared every pair of arrays using the root mean
-squared difference across all deposited beta values. For 46/48 baseline arrays,
-the closest follow-up array belongs to the annotated participant; in the reverse
-direction this holds for 45/48 follow-up arrays. The baseline exceptions are IDs
-29 and 37; the reverse comparison also flags ID 8. These distances cannot establish
-sample identity or a swap. The [paper's quality-control description](https://pmc.ncbi.nlm.nih.gov/articles/PMC13430503/)
-already reports two exceptions to before/after hierarchical clustering and states
-that SNP-based checks agreed with the cohort. Our distance calculation is different
-from that clustering, so the exceptions cannot be equated. We retain every deposited
-pair and recommend requesting the sample-to-participant mapping and SNP-based QC.
-The complete diagnostic is in [pair_distance_check.csv](results/audit/pair_distance_check.csv).
+## Supporting plots, sensitivity and validation
 
-## Reproduce and inspect the results
+The [volcano figure](results/corrected_visits/diet_code/figure1b_observed_and_shuffled.png)
+shows observed groups on the top row and one shared shuffled assignment on the
+bottom row. Both rows use limma p-values on the vertical axes. Count-test p-values
+are not placed on the observed volcano row. The example seed is 70900; its
+[counts and provenance](results/corrected_visits/diet_code/shuffled_example/run.json)
+are separate from the primary seed 70899.
 
-The Git repository includes the analysis code, pinned dependencies, tests, public
-sample annotations, data hashes, executed notebook and HTML, figures, summaries,
-and all 9,999 paired shuffle counts. The preserved limma source archive includes
-its original license. Local environments, caches, temporary files and assistant
-state are excluded.
+Separate visit-specific count diagnostics appear in the
+[count histograms](results/corrected_visits/diet_code/null_counts.png) and
+[count summary](results/corrected_visits/diet_code/count_test_summary.csv). They test
+an excess of red sites at each visit, without an across-visit adjustment.
+Named-label and separate-visit sensitivity fits are displayed in the notebook;
+they do not validate a named diet effect while the annotations conflict.
 
-The large source methylation matrix, prepared binary matrix, and full per-CpG
-`*_limma.csv.gz` tables are also excluded from Git because they can be downloaded
-or regenerated. You can read the saved notebook outputs or HTML immediately after
-cloning. With Python dependencies installed, `make change-test` reproduces the
-main p-value directly from the included counts, without those large files.
+**Fourteen automated tests pass**, including comparisons with R limma, correction
+identity checks, rejection of double application, sample-order checks, tail ties,
+the +1 correction, and download integrity. Before the permutation run, every observed
+effect, moderated t statistic and p-value was checked against the full R fit.
 
-To execute **every** notebook cell after a fresh clone, first set up Python and R
-as described below, then run `make fetch`, `make prepare`, and `make limma` to
-rebuild the full tables used by the individual-CpG example. `make plots` also
-requires those files and will rebuild the illustrated shuffled fit if needed.
-The existing 9,999 shuffle counts can be reused; a full permutation rerun is
-only needed when regenerating the entire analysis.
+The [corrected audit](results/corrected_visits/audit/audit_summary.json) verifies the
+patch, unchanged source files and beta matrix, all summary fields, and selected
+full-data shuffles against independent factorial-coded R fits. All **11 R fits**
+agree on the counts; the largest observed absolute statistic discrepancy is below
+2.75 × 10⁻¹³. The correction changes the paired counts for **9,984 of 9,999**
+assignments, confirming that the old null distribution must be refitted. The
+[invariance audit](results/corrected_visits/audit/invariance_summary.json) checks
+explicit residual calculations, group/visit/order symmetries, cutoff distances and
+descriptive sample-pair distances. Distance QC cannot establish biological identity
+or justify relabeling participants.
 
-Run commands from the project root. In the existing environment, `make notebook`
-opens the notebook. To regenerate the summaries and figures from saved shuffles,
-then refresh the executed notebook and HTML copy:
+The separate Monte Carlo check uses seed **70901** with corrected visits and gives
+**p = 0.1859** (1,858 of 9,999 changes ≥ +24), close to the primary 0.1881. Its
+[result](results/corrected_visits/audit/independent_seed_summary.json) and
+[paired counts](results/corrected_visits/audit/independent_seed_counts.csv) are
+reported separately in the notebook and are not pooled with the main run.
+Historical audits in `results/audit/` refer to the original annotation scenario and
+code version; their evidence is retained rather than rewritten.
 
-```bash
-make plots
-make execute-notebook
-```
+These checks start with the deposited processed beta matrix. They do not repeat
+IDAT normalization or probe filtering, and do not evaluate the paper's pathway,
+blood-cell or epigenetic-clock analyses.
 
-`make plots` runs both `make change-test` and `make count-test`, ensures that the
-single shuffled example is available, and exports figures. The two summary targets
-can also be run individually; neither generates new shuffles. Notebook execution
-checks the change calculation against the saved paired rows and summary.
+## Reproduce the current analysis
 
-To change only the illustrated assignment in the volcano figure:
+The repository includes code, pinned dependencies, sample annotations, the explicit
+correction, hashes, executed notebook/HTML, figures, summaries and paired shuffle
+counts for both scenarios. Large matrices and full `*_limma.csv.gz` tables are
+excluded from Git. Local environments, assistant state and private correspondence
+are also excluded.
 
-```bash
-make plots EXAMPLE_SEED=70900  # replace with another integer for a different example
-make execute-notebook
-```
-
-Later plot builds reuse the selected example seed unless another is supplied.
-This leaves the 9,999-shuffle change test and its seed unchanged. The example fit is
-reused when its inputs match; `.venv/bin/python scripts/shuffled_example.py --force`
-forces recalculation.
-
-For a fresh Python environment with notebook support:
+You can read the saved notebook or HTML immediately after cloning. With Python
+dependencies installed, `make change-test` reproduces the current p-value directly
+from the included count pairs. To execute every notebook cell, rebuild the full
+per-CpG tables using `make fetch`, `make prepare` and `make limma` first.
 
 ```bash
 uv venv .venv
@@ -301,147 +236,57 @@ uv pip sync --python .venv/bin/python requirements-notebook.lock.txt
 .venv/bin/python -m ipykernel install --prefix .venv --name vegandiet --display-name 'Python (vegandiet)'
 ```
 
-The optional `requirements.lock.txt` installs only the scientific dependencies;
-syncing it removes the notebook dependencies. The saved R fits used **R 4.3.3 and
-limma 3.54.0**; the paper reports R 4.2.3. The project-local R runtime is under
-`.tools/`; [scripts/run_r.sh](scripts/run_r.sh) uses it when present and otherwise
-calls an installed `Rscript`. With R installed, the preserved limma source can be
-installed into the project library by running the following in R from the project root:
+The saved fits use R 4.3.3 and limma 3.54.0 (the paper reports R 4.2.3).
+`scripts/run_r.sh` uses project-local R under `.tools/` when available, otherwise an
+installed `Rscript`. With R installed, run this from the repository root in R:
 
 ```r
-dir.create(".tools/r-library", recursive = TRUE, showWarnings = FALSE)
-install.packages("data/reference/limma_3.54.0.tar.gz",
-                 repos = NULL, type = "source", lib = ".tools/r-library")
+dir.create(".tools/r-library", recursive=TRUE, showWarnings=FALSE)
+install.packages("data/reference/limma_3.54.0.tar.gz", repos=NULL,
+                 type="source", lib=".tools/r-library")
 ```
 
-To rebuild the analysis, including all shuffled fits:
+Then run from the project root:
 
 ```bash
-make fetch          # 1.49 GB processed matrix; raw IDAT files are not needed
-make prepare        # validate data and participant alignment
-make test           # numerical reference, pairing, and tail-count checks
-make limma          # numeric and named annotation scenarios
+make fetch          # uses stable download URLs and verifies pinned SHA-256 hashes
+make prepare        # builds original data, then applies the explicit visit patch
+make test
+make limma          # current corrected-visits model and sensitivities
 make permutation PERMUTATIONS=9999 SEED=70899
-make plots
+make plots EXAMPLE_SEED=70900
+make audit
+OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 .venv/bin/python scripts/audit_results.py --scenario corrected_visits --independent-seed 70901
 make execute-notebook
 ```
 
-`make all` runs the pipeline through figure generation; run `make execute-notebook`
-afterwards to refresh the notebook and HTML. Allow several GB of RAM and disk
-space. Each shuffle covers every CpG, and runtime increases with the shuffle count.
-Rebuilding an analysis replaces its generated outputs. Changing the full run's
-seed can slightly change the estimated p-value through Monte Carlo sampling.
+If the prepared matrix already exists, `make corrections` only rebuilds the corrected
+sample table. `make all` runs through figure generation; audit and notebook execution
+are separate. `make notebook` opens Jupyter Lab. `make plots` reuses the last example
+seed unless another is supplied. Allow several GB of RAM/disk and several minutes
+for each complete permutation run.
 
-## Validation and saved files
+**Scenario selection is explicit:** analysis commands default to `corrected_visits`.
+To intentionally rerun a historical step use, for example,
+`make permutation SCENARIO=deposited SEED=70899`. This overwrites that historical
+scenario's generated outputs. `make audit-deposited` repeats the original source
+and replay audit. The current notebook always reads `results/corrected_visits/`.
 
-The follow-up audit checks the calculation separately from its interpretation.
-It found no discrepancy affecting the saved **158 → 176, p = 0.2630** result:
+If the public input contents change, fetching fails against the archived hashes
+instead of silently mixing annotation versions. Reconcile a new public release
+with the documented local correction before updating those inputs.
 
-- All **78,041,664 deposited beta values** match the prepared binary matrix exactly,
-  including all CpG IDs and sample-column mappings. Source-file hashes match the
-  manifest, and both visits carry the same participant labels.
-- An independent R implementation fits **uncentered M-values with an intercept,
-  diet, visit, and interaction**, rather than the production four-cell coding.
-  Its observed effects, moderated t statistics, raw p-values and BH-adjusted
-  p-values agree with the saved fit to within **2.5 × 10⁻¹³** in absolute value.
-- **Eleven full-data R fits**—the observed grouping and ten saved shuffles—give
-  identical red-site counts. The checks include the first and last assignments,
-  large positive/negative changes, and changes of +17, +18, and +19 around the
-  upper-tail cutoff.
-- A complete replay of **all 9,999 shuffles** reproduces every paired count exactly.
-  The original saved result files are retained unchanged.
-- All **ten automated tests** pass. These also compare every assignment in a
-  small paired experiment with R limma and check tail ties, the +1 correction,
-  participant alignment and deterministic threaded calculations. Added tests
-  check constant, zero and widely varying residual variances against R and ensure
-  that the summary audit rejects inconsistent counts and shuffle identifiers.
-- Independently recomputed summaries match all saved count/change fields and
-  shuffle identifiers. A fit using explicit within-cell residuals matches limma;
-  swapping group names, reversing visits, and reordering participants produce
-  exactly the expected counts. Numerical discrepancies are below 3 × 10⁻¹⁵.
-- No observed site lies close enough to a cutoff for the numerical differences
-  between our verified implementations to change its classification. This does
-  not explain the difference from the authors' unspecified implementation.
-- A **separate 9,999-shuffle run with seed 70901** gives 2,623 changes ≥ +18 and
-  **p = 0.2624**, compared with 0.2630 in the original run (Monte Carlo SE about
-  0.0044 in each). The seed was selected before this check was fitted. This checks
-  Monte Carlo stability; it does not validate the unknown diet labels or original
-  model. The runs are reported separately, without replacing or pooling results.
-
-The code review found and fixed one alignment weakness: `prepare_matrices` used
-matrix-column indices as metadata-row positions when retrieving group labels.
-Reordering metadata independently could therefore change labels incorrectly.
-Labels are now aligned explicitly by participant and visit, with checks for a
-one-to-one matrix-column mapping. A regression test covers metadata reordering.
-The production run uses metadata in matrix-column order; the complete replay
-after this fix confirms that its results are unchanged.
-
-The machine-readable evidence is in [audit_summary.json](results/audit/audit_summary.json),
-[independent_limma_counts.csv](results/audit/independent_limma_counts.csv), and
-[full_replay_summary.json](results/audit/full_replay_summary.json). With the full
-local data and R fits available, run `make test` and `make audit` to repeat the
-checks. The independent R audit is implemented in
-[audit_limma.R](scripts/audit_limma.R); [audit_results.py](scripts/audit_results.py)
-checks the source data and orchestrates the fits and isolated replay.
-[audit_invariants.py](scripts/audit_invariants.py) verifies summaries, model
-symmetries, cutoff distances and sample distances; its evidence is saved in
-[invariance_summary.json](results/audit/invariance_summary.json).
-The additional Monte Carlo result and all its paired counts are in
-[independent_seed_summary.json](results/audit/independent_seed_summary.json) and
-[independent_seed_counts.csv](results/audit/independent_seed_counts.csv). Repeat
-that separate check with:
-
-```bash
-OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 .venv/bin/python scripts/audit_results.py --independent-seed 70901
-```
-
-These checks
-start from the deposited processed beta matrix; they do not independently repeat
-the original IDAT normalization or probe filtering.
-
-**Scope of the claim when contacting the authors:** the value 0.2630 is our
-additional test of the reconstructed **count increase**, conditional on the numeric
-grouping, candidate M-value model and unrestricted exchangeability. It does not
-establish an error in any published individual-CpG p-value or refute the study's
-other analyses. The paper itself reports no BH-significant DMPs in this analysis.
-The published change is +24, while we reconstructed +18; our result is not yet
-an exact test of that published change.
-
-The unresolved questions to put to the authors are:
-
-1. Which participant-to-diet mapping was used, and how do the two deposited diet
-   fields and the Table 1 sex counts relate to it? Can the sample identities and
-   pairing be confirmed using the SNP-based QC?
-2. Can they provide the Figure 1B input values, model/design matrix, contrasts,
-   covariates and limma options, together with the before/after DMP tables, to
-   resolve the six-site follow-up discrepancy?
-3. Which randomization blocks and allocation rules apply to the 48 participants
-   in the methylation subset?
-
-The main results and their inputs are directly inspectable:
+Main result files:
 
 | File | Contents |
 | --- | --- |
-| [change_test_summary.csv](results/diet_code/change_test_summary.csv) | Observed +18, shuffled quantiles, upper-tail p-value and Monte Carlo SE |
-| [permutation_null_changes.csv](results/diet_code/permutation_null_changes.csv) | One row per shuffle: assignment number, before count, after count and difference |
-| [change_test_run.json](results/diet_code/change_test_run.json) | Change statistic, tail, seed, provenance and limitations |
-| [permutation_null_counts.csv](results/diet_code/permutation_null_counts.csv) | Original 9,999 paired counts, retained unchanged |
-| [permutation_run.json](results/diet_code/permutation_run.json) | Full fitting run's seed, model, assignment scheme and counts |
-| [limma_summary.csv](results/diet_code/limma_summary.csv) | Observed red counts, BH counts and model parameters |
-| [count_test_summary.csv](results/diet_code/count_test_summary.csv) | Secondary visit-specific count tests |
-| [audit.json](data/processed/audit.json) | Dimensions, annotation audit and source matrix hash |
+| [change_test_summary.csv](results/corrected_visits/diet_code/change_test_summary.csv) | Observed +24, shuffled quantiles, p-value and Monte Carlo SE |
+| [permutation_null_counts.csv](results/corrected_visits/diet_code/permutation_null_counts.csv) | All 9,999 newly fitted before/after pairs |
+| [permutation_null_changes.csv](results/corrected_visits/diet_code/permutation_null_changes.csv) | Paired differences and assignment numbers |
+| [permutation_run.json](results/corrected_visits/diet_code/permutation_run.json) | Scenario, sample-table hash, seed, model and thresholds |
+| [scenario_comparison.csv](results/corrected_visits/audit/scenario_comparison.csv) | Historical and corrected results side by side |
 
-The original per-CpG results are `results/diet_code/before_limma.csv.gz` and
-`after_limma.csv.gz`. Named-label and separate-visit sensitivity results are in
-`results/diet_named/` and `results/*/separate_time_sensitivity.csv`. Participant
-assignments and R results for the current volcano example are in
-`results/diet_code/shuffled_example/`; the earlier 381/340 example is in
-`results/diet_code/shuffled_examples/seed_70899/`. Figures are saved as PNG and PDF.
-
-The analysis code is in [figure1b_limma.R](scripts/figure1b_limma.R),
-[permutation.py](scripts/permutation.py), and [change_test.py](scripts/change_test.py);
-[numerical tests](tests/test_statistics.py) document the reference checks. The limma
-source archive includes its license and authorship. The optimized variance-prior
-calculation follows `fitFDist` and `squeezeVar` in that version. For the statistical
-background, see [Monte Carlo permutation p-values](https://arxiv.org/abs/1603.05766)
-and [permutation inference and exchangeability](https://pmc.ncbi.nlm.nih.gov/articles/PMC4010955/).
+Statistical references: [limma guide](https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf),
+[minfi scales](https://bioconductor.org/packages/release/bioc/manuals/minfi/man/minfi.pdf),
+[Monte Carlo permutation p-values](https://arxiv.org/abs/1603.05766), and
+[exchangeability](https://pmc.ncbi.nlm.nih.gov/articles/PMC4010955/).

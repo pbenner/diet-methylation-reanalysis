@@ -1,0 +1,36 @@
+{
+  "scenario": "corrected_visits",
+  "corrected_rows": 4,
+  "only_time_changed": true,
+  "sample_and_matrix_column_order_preserved": true,
+  "source_samples_sha256": "b9c571115eb8e35ef1aa11edfb5ac544c3cb70f262db70356a50a8c074865fc1",
+  "correction_sha256": "a167ea05d7a97251a713ed14708c5d9df920da8d42172ee5156e8389ac84b784",
+  "corrected_samples_sha256": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+  "corrections": [
+    {
+      "array_id": "ID_204792200112_R01C01",
+      "participant": "5",
+      "original_time": 1,
+      "corrected_time": 0
+    },
+    {
+      "array_id": "ID_204792170106_R01C01",
+      "participant": "5",
+      "original_time": 0,
+      "corrected_time": 1
+    },
+    {
+      "array_id": "ID_204792780062_R01C01",
+      "participant": "8",
+      "original_time": 0,
+      "corrected_time": 1
+    },
+    {
+      "array_id": "ID_204792170105_R01C01",
+      "participant": "8",
+      "original_time": 1,
+      "corrected_time": 0
+    }
+  ],
+  "provenance": "data/corrections/provenance.json"
+}

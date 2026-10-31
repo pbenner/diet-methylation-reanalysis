@@ -1,0 +1,22 @@
+{
+  "checked_on": "2026-10-31",
+  "note": "The public files still contain the archived annotations; corrections are a separate local patch.",
+  "annotations": [
+    {
+      "file": "E-MTAB-17025.sdrf.txt",
+      "url": "https://www.ebi.ac.uk/biostudies/files/E-MTAB-17025/E-MTAB-17025.sdrf.txt",
+      "resolved_url": "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/025/E-MTAB-17025/Files/E-MTAB-17025.sdrf.txt",
+      "bytes": 68316,
+      "sha256": "492cad1d8c9a05db93fcc152b16972a6d44324b15a5abf2f51a59e2818e1c5dd",
+      "identical_to_archived": true
+    },
+    {
+      "file": "E-MTAB-17025.idf.txt",
+      "url": "https://www.ebi.ac.uk/biostudies/files/E-MTAB-17025/E-MTAB-17025.idf.txt",
+      "resolved_url": "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/025/E-MTAB-17025/Files/E-MTAB-17025.idf.txt",
+      "bytes": 4938,
+      "sha256": "1c01e7da9ded3e7ea6d4b54115417577dbef88af5841f21bd78fbf478af9e3b9",
+      "identical_to_archived": true
+    }
+  ]
+}

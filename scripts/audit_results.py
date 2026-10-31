@@ -14,6 +14,7 @@ import time
 
 import numpy as np
 import pandas as pd
+from scenarios import paths, result_base, add_argument
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -91,15 +92,16 @@ def validate_saved_summaries(folder):
             'shuffles_ge_observed':extreme,'p_upper':p}
 
 
-def replay_permutations(seed=None):
+def replay_permutations(seed=None, scenario='deposited'):
     """Replay every saved shuffle using the current code, writing only audit output."""
     import permutation
 
     started = time.monotonic()
-    original = ROOT/'results/diet_code/permutation_null_counts.csv'
+    sample_path, folder = paths(ROOT, 'diet_code', scenario)
+    original = folder/'permutation_null_counts.csv'
     validate_saved_summaries(original.parent)
     original_hash = sha256(original)
-    metadata = json.loads((ROOT/'results/diet_code/permutation_run.json').read_text())
+    metadata = json.loads((folder/'permutation_run.json').read_text())
     independent = seed is not None
     if independent and seed == metadata['seed']:
         raise ValueError('The independent run must use a different seed')
@@ -109,20 +111,21 @@ def replay_permutations(seed=None):
         with tempfile.TemporaryDirectory(prefix='vegandiet-audit-replay-') as temp:
             replay = Path(temp)
             (replay/'data').symlink_to(ROOT/'data',target_is_directory=True)
-            out = replay/'results/diet_code'
+            _, out = paths(replay, 'diet_code', scenario)
             out.mkdir(parents=True)
             for name in ['before_limma.csv.gz','after_limma.csv.gz']:
-                (out/name).symlink_to(ROOT/'results/diet_code'/name)
+                (out/name).symlink_to(folder/name)
             permutation.ROOT = replay
             permutation.run('diet_code',metadata['repetitions'],selected_seed,
-                            metadata['batch_size'],metadata['workers'])
+                            metadata['batch_size'],metadata['workers'], scenario=scenario)
             actual = pd.read_csv(out/'permutation_null_counts.csv')
             if not independent:
                 np.testing.assert_array_equal(actual,pd.read_csv(original))
-            observed = pd.read_csv(ROOT/'results/diet_code/limma_summary.csv').set_index('time')
+            observed = pd.read_csv(folder/'limma_summary.csv').set_index('time')
             observed_change = int(observed.loc['after','highlighted']-observed.loc['before','highlighted'])
             extreme = int(((actual.after-actual.before)>=observed_change).sum())
             report = {
+                'annotation_scenario':scenario,'samples_sha256':sha256(sample_path),
                 'method':('independent Monte Carlo check; seed specified before fitting' if independent
                           else 'full replay of current production code in an isolated output directory'),
                 'repetitions':len(actual),'seed':selected_seed,
@@ -138,7 +141,7 @@ def replay_permutations(seed=None):
     finally:
         permutation.ROOT = previous_root
     assert sha256(original) == original_hash
-    audit_out = ROOT/'results/audit'
+    audit_out = result_base(ROOT, scenario)/'audit'
     audit_out.mkdir(exist_ok=True)
     if independent:
         actual.to_csv(audit_out/'independent_seed_counts.csv',index=False)
@@ -273,6 +276,8 @@ def main():
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    add_argument(parser)
+    parser.set_defaults(scenario='deposited')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--replay', action='store_true', help='also replay all saved shuffles')
     group.add_argument('--replay-only', action='store_true', help='only replay the saved shuffles')
@@ -280,8 +285,10 @@ if __name__=='__main__':
                        help='run a separate Monte Carlo check without replacing the main results')
     args = parser.parse_args()
     if args.independent_seed is not None:
-        replay_permutations(seed=args.independent_seed)
+        replay_permutations(seed=args.independent_seed, scenario=args.scenario)
     elif not args.replay_only:
+        if args.scenario!='deposited':
+            parser.error('Use audit_corrected.py for the corrected-data audit')
         main()
     if args.replay or args.replay_only:
-        replay_permutations()
+        replay_permutations(scenario=args.scenario)

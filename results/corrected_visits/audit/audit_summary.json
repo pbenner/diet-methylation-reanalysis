@@ -1,0 +1,30 @@
+{
+  "annotation_scenario": "corrected_visits",
+  "samples_sha256": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+  "exactly_four_visit_labels_changed": true,
+  "other_annotations_and_array_order_unchanged": true,
+  "raw_inputs_and_beta_matrix_match_original_audit": true,
+  "same_participant_grouping_and_shuffle_assignments_as_deposited_run": true,
+  "shuffle_rows_with_changed_before_or_after_counts": 9984,
+  "summary_consistency": {
+    "all_summary_fields_and_shuffle_ids_match": true,
+    "observed_change": 24,
+    "permutations": 9999,
+    "shuffles_ge_observed": 1880,
+    "p_upper": 0.1881
+  },
+  "independent_real_data_r_fits": 11,
+  "all_independent_r_counts_match": true,
+  "observed_max_absolute_errors": {
+    "max_abs_effect_error_1": 5.766220834146911e-15,
+    "max_abs_t_error_1": 1.5709655798446e-13,
+    "max_abs_p_error_1": 1.2356782264078e-13,
+    "max_abs_bh_error_1": 9.76996261670138e-15,
+    "max_abs_effect_error_2": 7.219919107015471e-15,
+    "max_abs_t_error_2": 2.74447131687339e-13,
+    "max_abs_p_error_2": 1.89182003396127e-13,
+    "max_abs_bh_error_2": 2.30038210702332e-13
+  },
+  "permutation_count_sha256": "b0eb9a5deda3c454dd285b065dff32ccb1a340772f465c10d36b2f62b65ebde3",
+  "permutation_script_sha256": "bb6c725ff42ab02ae68fd7529c381792a3d02d02c8da3c188f844288daf7bb66"
+}

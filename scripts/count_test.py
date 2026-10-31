@@ -9,6 +9,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from scenarios import paths, add_argument
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -35,11 +36,13 @@ def summarize_counts(observed, shuffled):
     }
 
 
-def run(field="diet_code"):
-    folder = ROOT / "results" / field
+def run(field="diet_code", scenario='corrected_visits'):
+    _, folder = paths(ROOT, field, scenario)
     null = pd.read_csv(folder / "permutation_null_counts.csv")
     observed = pd.read_csv(folder / "limma_summary.csv").set_index("time")
     metadata = json.loads((folder / "permutation_run.json").read_text())
+    if metadata.get('annotation_scenario','deposited') != scenario:
+        raise ValueError('Annotation scenario differs from the fitted run')
     if metadata["group_field"] != field or len(null) != metadata["repetitions"]:
         raise ValueError("Saved count table does not match permutation run metadata")
     for time in ("before", "after"):
@@ -50,6 +53,8 @@ def run(field="diet_code"):
     table = pd.DataFrame(rows)
     table.to_csv(folder / "count_test_summary.csv", index=False)
     report = {
+        "annotation_scenario": scenario,
+        "samples_sha256": metadata.get("samples_sha256"),
         "statistic": "number of CpGs passing limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
         "tail": "upper: shuffled count >= observed count, including ties",
         "p_formula": "(1 + shuffles_ge_observed) / (B + 1)",
@@ -76,5 +81,7 @@ def run(field="diet_code"):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    add_argument(parser)
     parser.add_argument("--group-field", choices=["diet_code", "diet_named"], default="diet_code")
-    run(parser.parse_args().group_field)
+    args = parser.parse_args()
+    run(args.group_field, args.scenario)

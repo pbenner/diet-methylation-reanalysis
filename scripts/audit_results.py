@@ -126,6 +126,8 @@ def replay_permutations(seed=None, scenario='deposited'):
             extreme = int(((actual.after-actual.before)>=observed_change).sum())
             report = {
                 'annotation_scenario':scenario,'samples_sha256':sha256(sample_path),
+                'permutation_scheme':metadata.get('permutation_scheme','unrestricted'),
+                'block_file_sha256':metadata.get('block_file_sha256'),
                 'method':('independent Monte Carlo check; seed specified before fitting' if independent
                           else 'full replay of current production code in an isolated output directory'),
                 'repetitions':len(actual),'seed':selected_seed,

@@ -2,11 +2,11 @@ PYTHON ?= .venv/bin/python
 PERMUTATIONS ?= 9999
 SEED ?= 70899
 EXAMPLE_SEED ?=
-SCENARIO ?= corrected_visits
+SCENARIO ?= blocked_randomization
 export OPENBLAS_NUM_THREADS = 4
 export OMP_NUM_THREADS = 4
 
-.PHONY: fetch prepare corrections limma permutation count-test change-test shuffled-example plots test audit audit-deposited all notebook execute-notebook
+.PHONY: fetch prepare corrections randomization limma permutation count-test change-test shuffled-example plots test audit audit-deposited all notebook execute-notebook
 fetch:
 	$(PYTHON) scripts/fetch_data.py
 prepare:
@@ -14,9 +14,13 @@ prepare:
 	$(PYTHON) scripts/prepare_corrections.py
 corrections:
 	$(PYTHON) scripts/prepare_corrections.py
+randomization:
+	$(PYTHON) scripts/prepare_randomization.py
 limma:
 	bash scripts/run_r.sh scripts/figure1b_limma.R diet_code '' $(SCENARIO)
+ifneq ($(SCENARIO),blocked_randomization)
 	bash scripts/run_r.sh scripts/figure1b_limma.R diet_named '' $(SCENARIO)
+endif
 permutation:
 	$(PYTHON) scripts/permutation.py --scenario $(SCENARIO) --permutations $(PERMUTATIONS) --seed $(SEED)
 count-test:
@@ -30,8 +34,8 @@ plots: count-test change-test shuffled-example
 test:
 	$(PYTHON) -m unittest discover -s tests -v
 audit:
-	$(PYTHON) scripts/audit_corrected.py
-	$(PYTHON) scripts/audit_invariants.py --scenario corrected_visits
+	$(PYTHON) scripts/audit_blocks.py
+	$(PYTHON) scripts/audit_invariants.py --scenario blocked_randomization
 audit-deposited:
 	$(PYTHON) scripts/audit_results.py --replay
 	$(PYTHON) scripts/audit_invariants.py --scenario deposited

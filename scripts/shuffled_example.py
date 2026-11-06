@@ -11,12 +11,13 @@ import subprocess
 
 import numpy as np
 import pandas as pd
-from scenarios import paths, add_argument
+from scenarios import paths, add_argument, DEFAULT_SCENARIO
+from randomization import allocation, draw_assignment, BLOCK_SCENARIO, BLOCK_FILE
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def run(seed=None, force=False, scenario='corrected_visits'):
+def run(seed=None, force=False, scenario=DEFAULT_SCENARIO):
     sample_path, folder = paths(ROOT, 'diet_code', scenario)
     out = folder / "shuffled_example"
     metadata = json.loads((folder / "permutation_run.json").read_text())
@@ -30,11 +31,13 @@ def run(seed=None, force=False, scenario='corrected_visits'):
     if seed < 0:
         raise ValueError("The shuffling seed must be nonnegative")
     sources = [
-        "scripts/shuffled_example.py", "scripts/figure1b_limma.R", "scripts/run_r.sh",
+        "scripts/shuffled_example.py", "scripts/randomization.py", "scripts/figure1b_limma.R", "scripts/run_r.sh",
         "data/processed/audit.json", str(sample_path.relative_to(ROOT)), "data/processed/cpg_ids.txt",
         str((folder/"permutation_run.json").relative_to(ROOT)),
         str((folder/"permutation_null_counts.csv").relative_to(ROOT)),
     ]
+    if scenario == BLOCK_SCENARIO:
+        sources.append(BLOCK_FILE)
     fingerprints = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in sources}
     matrix = (ROOT / "data/processed/beta.bin").stat()
     inputs = {"source_sha256": fingerprints, "matrix_bytes": matrix.st_size,
@@ -54,7 +57,12 @@ def run(seed=None, force=False, scenario='corrected_visits'):
     people = sorted(samples.participant.unique())  # Same ordering as permutation.py.
     baseline = samples[samples.time == 0].set_index("participant").loc[people]
     labels = baseline.diet_code.eq(metadata["numerator"]).to_numpy()
-    shuffled = np.random.default_rng(seed).permutation(labels)
+    block_indices, allocation_info = allocation(ROOT, people, labels, scenario)
+    if allocation_info['permutation_scheme'] != metadata.get('permutation_scheme', 'unrestricted'):
+        raise ValueError('Example and primary run use different allocation restrictions')
+    if block_indices is not None and allocation_info['block_file_sha256'] != metadata['block_file_sha256']:
+        raise ValueError('Block file differs from the primary run')
+    shuffled = draw_assignment(np.random.default_rng(seed), labels, block_indices)
     assignments = pd.DataFrame({"participant": people,
         "observed_group": baseline.diet_code.to_numpy(),
         "shuffled_group": np.where(shuffled, metadata["numerator"], metadata["denominator"])})
@@ -82,6 +90,7 @@ def run(seed=None, force=False, scenario='corrected_visits'):
                 raise ValueError(f"{time}: independent R count differs from saved shuffle #1")
         verification += "; both counts also match the first saved count-test assignment"
     report = {"inputs": inputs, "shuffle_number": 1, "seed": seed, "annotation_scenario": scenario,
+        **allocation_info,
         "selection": "first assignment from the specified seed; seed selected before fitting",
         "method": "same R limma 3.54.0 model and thresholds as the observed fit",
         "p_values": "two-sided limma p-values fitted to this one shuffled grouping",

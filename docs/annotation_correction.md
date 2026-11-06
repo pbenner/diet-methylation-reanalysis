@@ -1,5 +1,10 @@
 # Visit-label correction recorded on 31 October 2026
 
+**Historical note:** the diet mapping and allocation-block questions below were
+resolved by author-supplied information recorded on 6 November 2026. See the
+[randomization update](randomization_update.md) for the current blocked analysis.
+This note preserves the information available for the 31 October correction.
+
 An author clarified that errors occurred while manually annotating the public
 submission. The author reported that the metadata used for the paper's analysis
 were correct, and that rerunning that analysis reproduced Figure 1B. The private

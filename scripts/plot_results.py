@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from scenarios import paths, add_argument
+from scenarios import paths, add_argument, DEFAULT_SCENARIO
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -28,9 +28,12 @@ def draw_volcano(ax, data, title, xlabel):
     return int(hit.sum())
 
 
-def main(scenario='corrected_visits'):
+def main(scenario=DEFAULT_SCENARIO):
     _, out = paths(ROOT, 'diet_code', scenario)
-    annotation_label = 'Visits corrected for donors 5 and 8' if scenario=='corrected_visits' else 'Original deposited visits'
+    annotation_label = 'Visits corrected for donors 5 and 8' if scenario!='deposited' else 'Original deposited visits'
+    blocked = scenario == 'blocked_randomization'
+    scheme_label = 'within-block participant shuffles' if blocked else 'unrestricted participant shuffles'
+    effect_label = 'Mean M-value difference: vegan − meat-rich' if blocked else 'Mean M-value difference: code 0 − code 1'
     summary = pd.read_csv(out/"count_test_summary.csv").set_index("time")
     observed = {t: pd.read_csv(out/f"{t}_limma.csv.gz", usecols=["logFC", "P.Value"])
                 for t in ("before", "after")}
@@ -41,10 +44,10 @@ def main(scenario='corrected_visits'):
         row = summary.loc[time]
         titles[time] = f"{time.title()} · observed groups · {int(row.observed_count):,} red sites"
         count = draw_volcano(ax, observed[time], titles[time],
-                             "Mean M-value difference: code 0 − code 1")
+                             effect_label)
         if count != int(row.observed_count):
             raise ValueError(f"{time}: count-test summary does not match observed volcano points")
-    fig.suptitle(f"Observed Figure 1B reconstruction · numeric group codes\n{annotation_label}", fontsize=12)
+    fig.suptitle(f"Observed Figure 1B reconstruction\n{annotation_label}", fontsize=12)
     fig.savefig(out/"figure1b_observed.png", dpi=180)
     fig.savefig(out/"figure1b_observed.pdf", dpi=180)
     plt.close(fig)
@@ -54,18 +57,19 @@ def main(scenario='corrected_visits'):
     fig, axes = plt.subplots(2, 2, figsize=(11, 10), sharex=True, sharey=True, layout="constrained")
     for col, time in enumerate(("before", "after")):
         draw_volcano(axes[0, col], observed[time], titles[time],
-                     "Mean M-value difference: code 0 − code 1")
+                     effect_label)
         example = pd.read_csv(out/"shuffled_example"/f"{time}_limma.csv.gz",
                               usecols=["logFC", "P.Value"])
         expected = int(example_run["observed_counts_in_this_shuffle"][time])
         count = draw_volcano(axes[1, col], example,
                              f"{time.title()} · shuffled groups · {expected:,} red sites\n"
                              f"Example seed {example_run['seed']}: one illustrative assignment",
-                             "Mean M-value difference: shuffled 0 − shuffled 1")
+                             ("Mean M-value difference: shuffled vegan − meat-rich" if blocked
+                              else "Mean M-value difference: shuffled 0 − shuffled 1"))
         if count != expected:
             raise ValueError(f"{time}: example volcano does not match its saved R fit")
     fig.suptitle("Observed groups and one shuffled grouping · Figure 1B reconstruction\n"
-                 f"{annotation_label} · unrestricted shuffle · original blocks unavailable",
+                 f"{annotation_label} · {'within-block shuffle' if blocked else 'unrestricted shuffle'}",
                  fontsize=12)
     fig.savefig(out/"figure1b_observed_and_shuffled.png", dpi=180)
     fig.savefig(out/"figure1b_observed_and_shuffled.pdf", dpi=180)
@@ -85,7 +89,7 @@ def main(scenario='corrected_visits'):
         ax.set(title=f"{time.title()} · upper-tail count p = {row.count_p_upper:.4f}",
                xlabel="Red sites: limma raw p < 0.05 and |ΔM| > 0.5", ylabel="Number of shuffles")
         ax.legend(fontsize=8)
-    fig.suptitle(f"Is the observed red-site count unusually large?\n{annotation_label} · {len(null):,} unrestricted participant shuffles", fontsize=12)
+    fig.suptitle(f"Is the observed red-site count unusually large?\n{annotation_label} · {len(null):,} {scheme_label}", fontsize=12)
     fig.savefig(out/"null_counts.png", dpi=180)
     fig.savefig(out/"null_counts.pdf", dpi=180)
     plt.close(fig)
@@ -120,7 +124,7 @@ def main(scenario='corrected_visits'):
             transform=ax.transAxes, ha="right", va="top", fontsize=11,
             bbox={"boxstyle": "round,pad=0.5", "facecolor": "white", "edgecolor": "#bfc8ce"})
     fig.suptitle(f"Is the increase of {obs:+d} red sites unusually large?\n"
-                 f"{annotation_label} · {len(changes):,} unrestricted shuffles", fontsize=12)
+                 f"{annotation_label} · {len(changes):,} {scheme_label}", fontsize=12)
     fig.savefig(out/"null_changes.png", dpi=180)
     fig.savefig(out/"null_changes.pdf", dpi=180)
     plt.close(fig)

@@ -2,7 +2,7 @@
 
 Restricted to complete data, unweighted four-cell designs, trend=False,
 robust=False. Variance priors are re-estimated across all sites each shuffle.
-Original randomization blocks are unavailable: these shuffles are unrestricted.
+The current scenario shuffles within the author-supplied randomization blocks.
 """
 import argparse
 import hashlib
@@ -13,7 +13,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy import special, stats
-from scenarios import paths, add_argument
+from scenarios import paths, add_argument, DEFAULT_SCENARIO
+from randomization import allocation, draw_assignment
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -101,7 +102,7 @@ def prepare_matrices(beta, samples, field):
     return matrices, labels, groups
 
 
-def run(field, repetitions, seed, batch_size, workers=4, scenario='corrected_visits'):
+def run(field, repetitions, seed, batch_size, workers=4, scenario=DEFAULT_SCENARIO):
     if repetitions < 1 or batch_size < 1 or workers < 1:
         raise ValueError("Repetitions, batch size, and workers must be positive")
     sample_path, out = paths(ROOT, field, scenario)
@@ -111,6 +112,8 @@ def run(field, repetitions, seed, batch_size, workers=4, scenario='corrected_vis
     samples = pd.read_csv(sample_path, dtype={"participant": str, "diet_code": str})
     samples["matrix_index"] = np.arange(len(samples))
     matrices, labels, groups = prepare_matrices(beta, samples, field)
+    block_indices, allocation_info = allocation(ROOT, sorted(samples.participant.unique()),
+                                                labels, scenario, field)
     n = len(labels)
     n1, n0 = int(labels.sum()), int((~labels).sum())
     unscaled = 1/n1 + 1/n0
@@ -153,7 +156,8 @@ def run(field, repetitions, seed, batch_size, workers=4, scenario='corrected_vis
     with ThreadPoolExecutor(max_workers=workers) as pool:
         for start in range(0, repetitions, batch_size):
             size = min(batch_size, repetitions-start)
-            assignments = np.column_stack([rng.permutation(labels) for _ in range(size)]).astype(float)
+            assignments = np.column_stack([draw_assignment(rng, labels, block_indices)
+                                           for _ in range(size)]).astype(float)
             # A contiguous row per permutation avoids repeatedly reading strided columns.
             products = [np.ascontiguousarray(assignments.T @ m.T) for m in matrices]
             # map preserves assignment order; workers do not draw random numbers.
@@ -175,8 +179,9 @@ def run(field, repetitions, seed, batch_size, workers=4, scenario='corrected_vis
         "saved_count_rule": "limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
         "count_test": "run scripts/count_test.py to test for an excess of red sites",
         "model": "unblocked four group-by-time means; structure and moderation confirmed by author clarification",
-        "assumption": "unrestricted participant exchangeability, conditional on group counts; allocation blocks unavailable",
-        "status": "provisional: numeric grouping retained; verified diet mapping and allocation blocks unavailable",
+        **allocation_info,
+        "status": ("author-verified diets and blocks; conditional on analyzed-subset block counts"
+                   if block_indices is not None else "archived unrestricted allocation scheme"),
         "minimum_count_p": 1/(repetitions+1), "observed_df_prior": prior_df, "observed_s2_prior": scale}
     (out / "permutation_run.json").write_text(json.dumps(metadata, indent=2)+"\n")
     print(f"Saved {repetitions:,} paired red-site counts to {out / 'permutation_null_counts.csv'}")

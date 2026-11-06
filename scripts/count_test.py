@@ -1,7 +1,7 @@
 """Test the observed red-site count using saved joint participant shuffles.
 
 The red-site rule remains limma raw p < 0.05 and abs(logFC) > 0.5.
-These saved shuffles are unrestricted; original randomization blocks are unknown.
+The allocation restrictions are recorded with each saved permutation run.
 """
 import argparse
 import json
@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scenarios import paths, add_argument
+from scenarios import paths, add_argument, DEFAULT_SCENARIO
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -36,7 +36,7 @@ def summarize_counts(observed, shuffled):
     }
 
 
-def run(field="diet_code", scenario='corrected_visits'):
+def run(field="diet_code", scenario=DEFAULT_SCENARIO):
     _, folder = paths(ROOT, field, scenario)
     null = pd.read_csv(folder / "permutation_null_counts.csv")
     observed = pd.read_csv(folder / "limma_summary.csv").set_index("time")
@@ -54,6 +54,8 @@ def run(field="diet_code", scenario='corrected_visits'):
     table.to_csv(folder / "count_test_summary.csv", index=False)
     report = {
         "annotation_scenario": scenario,
+        "permutation_scheme": metadata.get('permutation_scheme', 'unrestricted'),
+        "block_file_sha256": metadata.get('block_file_sha256'),
         "samples_sha256": metadata.get("samples_sha256"),
         "statistic": "number of CpGs passing limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
         "tail": "upper: shuffled count >= observed count, including ties",
@@ -64,14 +66,11 @@ def run(field="diet_code", scenario='corrected_visits'):
         "seed": metadata["seed"],
         "permutation_unit": metadata["permutation_unit"],
         "variance_prior": metadata["variance_prior"],
-        "randomization": "unrestricted fixed-size participant shuffles; not the original blocked allocation",
-        "original_trial_reported_block_size": 13,
+        "randomization": metadata['assumption'],
         "original_trial_methods": "https://doi.org/10.3390/microorganisms9040727",
         "limitations": [
-            "Participant-to-block mapping and full allocation procedure are unavailable in the deposit.",
-            "Conflicting numeric and named diet annotations prevent verification of the original grouping.",
-            f"The candidate model gives {int(observed.loc['before', 'highlighted'])}/{int(observed.loc['after', 'highlighted'])} sites; the paper reports 158/182.",
-            "Calibration requires joint exchangeability of whole participant profiles under the chosen null.",
+            "Calibration requires joint exchangeability of whole participant profiles under the recorded allocation restrictions.",
+            "The analyzed subset and its observed diet counts are held fixed; selection and replacement mechanisms are not reconstructed.",
             "A large p-value does not establish absence of a diet effect or identify individual false positives.",
         ],
     }

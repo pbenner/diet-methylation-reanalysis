@@ -12,7 +12,7 @@ from scipy import stats
 
 from audit_results import ROOT, sha256, validate_saved_summaries
 from permutation import moderated_t, prepare_matrices
-from scenarios import paths, result_base, add_argument
+from scenarios import paths, result_base, add_argument, DEFAULT_SCENARIO
 
 
 def direct_fit(matrices, labels):
@@ -70,7 +70,7 @@ def pair_distances(beta, samples):
     return table, info
 
 
-def main(scenario='corrected_visits'):
+def main(scenario=DEFAULT_SCENARIO):
     sample_path, folder = paths(ROOT, 'diet_code', scenario)
     out = result_base(ROOT, scenario)/'audit'
     out.mkdir(exist_ok=True)

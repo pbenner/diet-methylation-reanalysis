@@ -7,9 +7,9 @@ args <- commandArgs(trailingOnly=TRUE)
 assignments <- read.csv(args[1], check.names=FALSE, colClasses="character")
 out <- args[2]
 scenario <- if(length(args)>=3) args[3] else "deposited"
-stopifnot(scenario %in% c("deposited","corrected_visits"))
-sample_file <- if(scenario=="corrected_visits") "samples_corrected_visits.csv" else "samples.csv"
-result_dir <- if(scenario=="corrected_visits") "results/corrected_visits/diet_code" else "results/diet_code"
+stopifnot(scenario %in% c("deposited","corrected_visits","blocked_randomization"))
+sample_file <- if(scenario!="deposited") "samples_corrected_visits.csv" else "samples.csv"
+result_dir <- if(scenario!="deposited") file.path("results",scenario,"diet_code") else "results/diet_code"
 samples <- read.csv(file.path("data/processed",sample_file), colClasses=c(participant="character", diet_code="character"))
 cpg <- readLines("data/processed/cpg_ids.txt")
 beta <- matrix(readBin("data/processed/beta.bin", "double", n=length(cpg)*nrow(samples),

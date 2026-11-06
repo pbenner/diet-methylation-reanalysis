@@ -30,3 +30,6 @@ __pycache__/
 /data/processed/*.bin
 /data/processed/*.npy
 /results/**/*.csv.gz
+
+# Original author-supplied workbook; use the validated minimal CSV for analysis.
+/ID_BlockAssignment_DrBenner.xlsx

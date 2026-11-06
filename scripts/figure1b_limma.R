@@ -5,10 +5,11 @@ stopifnot(as.character(packageVersion("limma")) == "3.54.0")
 args <- commandArgs(trailingOnly=TRUE)
 field <- if (length(args)) args[1] else "diet_code"
 stopifnot(field %in% c("diet_code", "diet_named"))
-scenario <- if (length(args)>=3) args[3] else "corrected_visits"
-stopifnot(scenario %in% c("corrected_visits","deposited"))
-base <- if (scenario=="corrected_visits") "results/corrected_visits" else "results"
-sample_file <- if (scenario=="corrected_visits") "samples_corrected_visits.csv" else "samples.csv"
+scenario <- if (length(args)>=3) args[3] else "blocked_randomization"
+stopifnot(scenario %in% c("blocked_randomization","corrected_visits","deposited"))
+if (scenario=="blocked_randomization") stopifnot(field=="diet_code")
+base <- if (scenario!="deposited") file.path("results",scenario) else "results"
+sample_file <- if (scenario!="deposited") "samples_corrected_visits.csv" else "samples.csv"
 out <- file.path(base, field)
 shuffled_example <- length(args) >= 2 && nzchar(args[2])
 if (shuffled_example) out <- file.path(out, "shuffled_example")
@@ -69,5 +70,5 @@ for (time in 0:1) {
 }
 write.csv(do.call(rbind, sensitivity), file.path(out, "separate_time_sensitivity.csv"), row.names=FALSE)
 }
-capture.output(sessionInfo(), file=file.path(out, "R_session.txt"))
+writeLines(sub("[[:space:]]+$", "", capture.output(sessionInfo())), file.path(out, "R_session.txt"))
 print(do.call(rbind, summary))

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scenarios import paths, add_argument
+from scenarios import paths, add_argument, DEFAULT_SCENARIO
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -39,7 +39,7 @@ def summarize_change(observed_before, observed_after, shuffled_before, shuffled_
     }, changes
 
 
-def run(field="diet_code", scenario='corrected_visits'):
+def run(field="diet_code", scenario=DEFAULT_SCENARIO):
     _, folder = paths(ROOT, field, scenario)
     null = pd.read_csv(folder / "permutation_null_counts.csv")
     observed = pd.read_csv(folder / "limma_summary.csv").set_index("time")
@@ -60,6 +60,9 @@ def run(field="diet_code", scenario='corrected_visits'):
     pd.DataFrame([result]).to_csv(folder / "change_test_summary.csv", index=False)
     report = {
         "annotation_scenario": scenario,
+        "permutation_scheme": metadata.get('permutation_scheme', 'unrestricted'),
+        "block_file_sha256": metadata.get('block_file_sha256'),
+        "randomization": metadata['assumption'],
         "samples_sha256": metadata.get("samples_sha256"),
         "statistic": "C_after - C_before, with the same participant assignment at both visits",
         "red_site_rule": "limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
@@ -71,8 +74,8 @@ def run(field="diet_code", scenario='corrected_visits'):
         "variance_prior": metadata["variance_prior"],
         "source": "existing paired rows of permutation_null_counts.csv; no new shuffles needed",
         "limitations": [
-            "Unrestricted exchangeability diagnostic; original trial block membership is unavailable.",
-            "Deposited diet labels conflict; verified participant-to-diet mapping is unavailable.",
+            "Validity requires joint exchangeability under the recorded allocation restrictions, conditional on the analyzed subset.",
+            "Recruitment, replacement and selection into the methylation subset are not reconstructed by the conditional shuffles.",
             "Each shuffle uses its own baseline count; the test is not conditional on a baseline count of 158.",
             "This is a change in thresholded-site counts, not a per-CpG diet-by-time interaction test.",
             "The statistic and upper-tail direction were chosen during exploratory review of the results.",

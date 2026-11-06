@@ -11,7 +11,7 @@ from scenarios import paths, result_base
 
 
 def main():
-    sample_path, folder = paths(ROOT)
+    sample_path, folder = paths(ROOT, scenario='corrected_visits')
     out = result_base(ROOT, 'corrected_visits')/'audit'
     out.mkdir(parents=True, exist_ok=True)
     original = pd.read_csv(ROOT/'data/processed/samples.csv',

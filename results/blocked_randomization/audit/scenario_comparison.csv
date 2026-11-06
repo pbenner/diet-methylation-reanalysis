@@ -1,0 +1,4 @@
+scenario,observed_before,observed_after,observed_change,shuffled_median_change,shuffled_q025_change,shuffled_q975_change,shuffles_ge_observed,permutations,change_p_upper,change_p_mc_se_approx
+deposited,158.0,176.0,18.0,2.0,-88.0,94.0,2629.0,9999.0,0.263,0.0044028443651633
+corrected_visits,158.0,182.0,24.0,1.0,-91.04999999999998,95.0,1880.0,9999.0,0.1881,0.0039081154456635
+blocked_randomization,158.0,182.0,24.0,0.0,-101.04999999999998,78.0,1619.0,9999.0,0.162,0.003684692347506

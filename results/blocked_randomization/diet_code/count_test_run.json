@@ -1,0 +1,22 @@
+{
+  "annotation_scenario": "blocked_randomization",
+  "permutation_scheme": "within_randomization_blocks",
+  "block_file_sha256": "abce8e4666dcd04679fd5cf369a751acda66854d4be6b05c89c45d1b6303c21e",
+  "samples_sha256": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+  "statistic": "number of CpGs passing limma raw two-sided p < 0.05 and abs(logFC) > 0.5",
+  "tail": "upper: shuffled count >= observed count, including ties",
+  "p_formula": "(1 + shuffles_ge_observed) / (B + 1)",
+  "interpretation": "test for an excess of red sites, separately at each visit; no across-visit adjustment",
+  "group_field": "diet_code",
+  "permutations": 9999,
+  "seed": 70899,
+  "permutation_unit": "participant; one assignment shared by both visits and every CpG",
+  "variance_prior": "re-estimated across all sites for each permutation",
+  "randomization": "joint exchangeability within the supplied randomization blocks, conditional on the analyzed participants and observed diet counts in each block; requires the analyzed-subset selection to permit this exchangeability",
+  "original_trial_methods": "https://doi.org/10.3390/microorganisms9040727",
+  "limitations": [
+    "Calibration requires joint exchangeability of whole participant profiles under the recorded allocation restrictions.",
+    "The analyzed subset and its observed diet counts are held fixed; selection and replacement mechanisms are not reconstructed.",
+    "A large p-value does not establish absence of a diet effect or identify individual false positives."
+  ]
+}

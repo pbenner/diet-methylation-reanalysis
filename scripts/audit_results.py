@@ -15,6 +15,7 @@ import time
 import numpy as np
 import pandas as pd
 from scenarios import paths, result_base, add_argument
+from run_inputs import validate_run_inputs
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -102,6 +103,7 @@ def replay_permutations(seed=None, scenario='deposited'):
     validate_saved_summaries(original.parent)
     original_hash = sha256(original)
     metadata = json.loads((folder/'permutation_run.json').read_text())
+    validate_run_inputs(ROOT, metadata, scenario)
     independent = seed is not None
     if independent and seed == metadata['seed']:
         raise ValueError('The independent run must use a different seed')

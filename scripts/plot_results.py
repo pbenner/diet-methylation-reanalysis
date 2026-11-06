@@ -10,6 +10,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from scenarios import paths, add_argument, DEFAULT_SCENARIO
+from run_inputs import validate_run_inputs
+from audit_results import validate_saved_summaries
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,6 +32,8 @@ def draw_volcano(ax, data, title, xlabel):
 
 def main(scenario=DEFAULT_SCENARIO):
     _, out = paths(ROOT, 'diet_code', scenario)
+    validate_run_inputs(ROOT, json.loads((out/'permutation_run.json').read_text()), scenario)
+    validate_saved_summaries(out)
     annotation_label = 'Visits corrected for donors 5 and 8' if scenario!='deposited' else 'Original deposited visits'
     blocked = scenario == 'blocked_randomization'
     scheme_label = 'within-block participant shuffles' if blocked else 'unrestricted participant shuffles'

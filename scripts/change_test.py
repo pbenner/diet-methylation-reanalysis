@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scenarios import paths, add_argument, DEFAULT_SCENARIO
+from run_inputs import validate_run_inputs
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -44,6 +45,7 @@ def run(field="diet_code", scenario=DEFAULT_SCENARIO):
     null = pd.read_csv(folder / "permutation_null_counts.csv")
     observed = pd.read_csv(folder / "limma_summary.csv").set_index("time")
     metadata = json.loads((folder / "permutation_run.json").read_text())
+    validate_run_inputs(ROOT, metadata, scenario, field)
     if metadata.get('annotation_scenario','deposited') != scenario:
         raise ValueError('Annotation scenario differs from the fitted run')
     if metadata["group_field"] != field or len(null) != metadata["repetitions"]:

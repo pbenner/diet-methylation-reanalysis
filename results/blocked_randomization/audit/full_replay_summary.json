@@ -1,0 +1,18 @@
+{
+  "annotation_scenario": "blocked_randomization",
+  "samples_sha256": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+  "permutation_scheme": "within_randomization_blocks",
+  "block_file_sha256": "abce8e4666dcd04679fd5cf369a751acda66854d4be6b05c89c45d1b6303c21e",
+  "method": "full replay of current production code in an isolated output directory",
+  "repetitions": 9999,
+  "seed": 70899,
+  "original_count_sha256": "9554bc04b88b8339ce416d36ded5f0d6221043ea02e821e25186a29edfc4077c",
+  "observed_change": 24,
+  "shuffles_ge_observed_change": 1619,
+  "p_upper": 0.162,
+  "elapsed_seconds": 161.91,
+  "numpy_version": "2.5.4",
+  "rng": "numpy.default_rng (PCG64)",
+  "permutation_script_sha256": "f957604c0dbf1d2ea5dc326269e97a6ded451c2bb3403de1bf6a17ccf1b2302e",
+  "all_paired_counts_equal": true
+}

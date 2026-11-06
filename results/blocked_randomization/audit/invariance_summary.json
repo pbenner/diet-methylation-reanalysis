@@ -1,0 +1,64 @@
+{
+  "annotation_scenario": "blocked_randomization",
+  "samples_sha256": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+  "summary_consistency": {
+    "all_summary_fields_and_shuffle_ids_match": true,
+    "observed_change": 24,
+    "permutations": 9999,
+    "shuffles_ge_observed": 1619,
+    "p_upper": 0.162
+  },
+  "direct_residual_fit_matches_saved_limma": true,
+  "invariances": {
+    "swap_group_names": {
+      "max_abs_effect_error": 0.0,
+      "max_abs_t_error": 1.3322676295501878e-15,
+      "max_abs_p_error": 4.440892098500626e-16,
+      "red_counts": [
+        158,
+        182
+      ],
+      "passed": true
+    },
+    "reverse_visits": {
+      "max_abs_effect_error": 0.0,
+      "max_abs_t_error": 1.7763568394002505e-15,
+      "max_abs_p_error": 4.440892098500626e-16,
+      "red_counts": [
+        182,
+        158
+      ],
+      "passed": true
+    },
+    "reorder_participants": {
+      "max_abs_effect_error": 4.440892098500626e-16,
+      "max_abs_t_error": 3.1086244689504383e-15,
+      "max_abs_p_error": 6.661338147750939e-16,
+      "red_counts": [
+        158,
+        182
+      ],
+      "passed": true
+    }
+  },
+  "closest_distance_to_observed_cutoffs": {
+    "before": {
+      "absolute_effect_0_5": 0.0002401194406840279,
+      "raw_p_0_05": 6.787751178002899e-07
+    },
+    "after": {
+      "absolute_effect_0_5": 0.0002863488101549905,
+      "raw_p_0_05": 1.2038143679810043e-07
+    }
+  },
+  "pair_distance_qc": {
+    "metric": "root mean squared beta difference across every deposited CpG",
+    "before_arrays_with_annotated_after_as_nearest": 45,
+    "after_arrays_with_annotated_before_as_nearest": 45,
+    "participants": 48,
+    "minimum_distinct_array_rmse": 0.021579659560355378,
+    "interpretation": "descriptive distance QC only; cannot establish identity, swaps or exclusions; labels retained"
+  },
+  "count_file_sha256": "9554bc04b88b8339ce416d36ded5f0d6221043ea02e821e25186a29edfc4077c",
+  "permutation_script_sha256": "f957604c0dbf1d2ea5dc326269e97a6ded451c2bb3403de1bf6a17ccf1b2302e"
+}

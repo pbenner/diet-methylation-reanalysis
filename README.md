@@ -193,10 +193,16 @@ separate-visit fits using verified diets. Historical fits based on the conflicti
 named-diet field are retained as archival diagnostics and excluded from the
 current diet comparison.
 
-**All 20 automated tests pass.** They cover R/limma agreement, numerical edge cases,
+**All 24 automated tests pass.** They cover R/limma agreement, numerical edge cases,
 participant and matrix alignment, the visit patch, input-file integrity, within-block
 count preservation, fixed singleton behavior, invalid allocation rejection and
-preservation of the historical unrestricted random sequence.
+preservation of the historical unrestricted random sequence, and rejection of
+saved results whose sample or allocation inputs have changed.
+
+The [6 November review](docs/analysis_review.md) replayed **all 9,999 shuffled fits**
+and recovered every before/after count pair exactly. The [full replay record](results/blocked_randomization/audit/full_replay_summary.json)
+documents this check. The review also confirmed 85 shared, 73 before-only and
+97 after-only observed red sites. The p-value remains **0.1620**.
 
 The [blocked audit](results/blocked_randomization/audit/audit_summary.json) verifies
 all 48 diets, explicit block membership, source hashes, every summary field and
@@ -271,6 +277,8 @@ rebuilds only the corrected sample table. `make all` runs through figure generat
 audits and notebook execution are separate. `make plots` reuses the last selected
 example seed unless another is supplied. Allow several GB of RAM/disk and several
 minutes per complete permutation run.
+`make audit` includes the independent R checks, invariance checks and a complete
+replay of the current 9,999-shuffle run.
 
 Analysis commands default to **`blocked_randomization`**. Explicit
 `SCENARIO=corrected_visits` or `SCENARIO=deposited` selects a historical unrestricted

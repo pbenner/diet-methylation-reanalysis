@@ -36,6 +36,7 @@ test:
 audit:
 	$(PYTHON) scripts/audit_blocks.py
 	$(PYTHON) scripts/audit_invariants.py --scenario blocked_randomization
+	$(PYTHON) scripts/audit_results.py --scenario blocked_randomization --replay-only
 audit-deposited:
 	$(PYTHON) scripts/audit_results.py --replay
 	$(PYTHON) scripts/audit_invariants.py --scenario deposited

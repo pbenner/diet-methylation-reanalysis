@@ -1,0 +1,66 @@
+{
+  "inputs": {
+    "source_sha256": {
+      "scripts/shuffled_example.py": "20cc2b0121a5b9fa902a69322051a66c6c32774caca58e3e20a3fc2867867325",
+      "scripts/randomization.py": "d8e6fef803ccbb40f8c0c68718485d74d36f202e21b63b5411cc97eb5560f48e",
+      "scripts/figure1b_limma.R": "8602787620940f234eb4bcc3fc8ed52a29ebc5e8d20a4132cc38b67840013f17",
+      "scripts/run_r.sh": "a8eef55c9aa0dd79d79b684e9aa079e7a5708b4b32ded37bac6ac89c53511156",
+      "data/processed/audit.json": "0209c7329e1a7d83a1fa2f207b42bf2923d38e50d24c9cdfb52bb286d471d831",
+      "data/processed/samples_corrected_visits.csv": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+      "data/processed/cpg_ids.txt": "bd55e2c70777d73127e4db16de85cf88c60b92b7504d310b4e82f66b9d827b0b",
+      "results/blocked_randomization/diet_code/permutation_run.json": "172b0e82820f9cb3e234c2f9d8606dd1d4985a902c28ab1d7d9d64c897eb04fc",
+      "results/blocked_randomization/diet_code/permutation_null_counts.csv": "9554bc04b88b8339ce416d36ded5f0d6221043ea02e821e25186a29edfc4077c",
+      "data/randomization/participant_blocks.csv": "abce8e4666dcd04679fd5cf369a751acda66854d4be6b05c89c45d1b6303c21e"
+    },
+    "matrix_bytes": 624333312,
+    "matrix_mtime_ns": 1792331443643674109,
+    "example_seed": 70900
+  },
+  "shuffle_number": 1,
+  "seed": 70900,
+  "annotation_scenario": "blocked_randomization",
+  "permutation_scheme": "within_randomization_blocks",
+  "block_file": "data/randomization/participant_blocks.csv",
+  "block_file_sha256": "abce8e4666dcd04679fd5cf369a751acda66854d4be6b05c89c45d1b6303c21e",
+  "block_counts": {
+    "normal_1": {
+      "vegan": 6,
+      "meat_rich": 4
+    },
+    "normal_2": {
+      "vegan": 4,
+      "meat_rich": 6
+    },
+    "normal_3": {
+      "vegan": 7,
+      "meat_rich": 6
+    },
+    "normal_4": {
+      "vegan": 4,
+      "meat_rich": 7
+    },
+    "replacement_1": {
+      "vegan": 2,
+      "meat_rich": 1
+    },
+    "replacement_2": {
+      "vegan": 1,
+      "meat_rich": 0
+    }
+  },
+  "diet_code_mapping": {
+    "0": "vegan",
+    "1": "meat-rich"
+  },
+  "assumption": "joint exchangeability within the supplied randomization blocks, conditional on the analyzed participants and observed diet counts in each block; requires the analyzed-subset selection to permit this exchangeability",
+  "selection": "first assignment from the specified seed; seed selected before fitting",
+  "method": "same R limma 3.54.0 model and thresholds as the observed fit",
+  "p_values": "two-sided limma p-values fitted to this one shuffled grouping",
+  "assignment_unit": "participant; one assignment shared by both visits and every CpG",
+  "count_test_seed": 70899,
+  "observed_counts_in_this_shuffle": {
+    "before": 152,
+    "after": 151
+  },
+  "verification": "group sizes and red-site counts verified against the R fitted results"
+}

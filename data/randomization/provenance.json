@@ -1,0 +1,45 @@
+{
+  "recorded_on": "2026-11-06",
+  "source": "ID_BlockAssignment_DrBenner.xlsx",
+  "source_sha256": "93e86bea78dad574f4ff8373cf7a7e18a59e898e3ab816de871a614f318061a7",
+  "source_description": "Allocation workbook supplied by Max Storz to the project owner.",
+  "worksheet": "Tabelle1",
+  "participant_mapping": "Column B matches all 48 deposited participant IDs; column A equals 142000 plus column B.",
+  "author_clarification": "0 = vegan, 1 = meat-rich; external statistician created the allocation list; planned blocks of 13 through observation 52, then replacement blocks of 4.",
+  "output_file": "data/randomization/participant_blocks.csv",
+  "output_sha256": "abce8e4666dcd04679fd5cf369a751acda66854d4be6b05c89c45d1b6303c21e",
+  "all_48_numeric_diet_assignments_match": true,
+  "planned_block_sizes": {
+    "normal": 13,
+    "replacement": 4
+  },
+  "analyzed_block_counts": {
+    "normal_1": {
+      "vegan": 6,
+      "meat_rich": 4
+    },
+    "normal_2": {
+      "vegan": 4,
+      "meat_rich": 6
+    },
+    "normal_3": {
+      "vegan": 7,
+      "meat_rich": 6
+    },
+    "normal_4": {
+      "vegan": 4,
+      "meat_rich": 7
+    },
+    "replacement_1": {
+      "vegan": 2,
+      "meat_rich": 1
+    },
+    "replacement_2": {
+      "vegan": 1,
+      "meat_rich": 0
+    }
+  },
+  "conditional_assignment_space": 74918844000,
+  "conditioning": "Shuffle labels within the supplied blocks, preserving observed counts among analyzed participants in each block; singleton replacement_2 remains fixed.",
+  "remaining_limit": "The workbook covers the analyzed subset. Conditional validity requires exchangeability after subset selection; the full recruitment, replacement and missingness mechanism is not reconstructed."
+}

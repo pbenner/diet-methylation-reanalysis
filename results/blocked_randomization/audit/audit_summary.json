@@ -1,0 +1,39 @@
+{
+  "annotation_scenario": "blocked_randomization",
+  "samples_sha256": "b9141171690fd173c6a038c8e43b86d00be16089defa43de2c727230bbc30f99",
+  "block_file_sha256": "abce8e4666dcd04679fd5cf369a751acda66854d4be6b05c89c45d1b6303c21e",
+  "source_workbook_present_and_verified": true,
+  "all_48_author_diets_match_numeric_codes": true,
+  "all_shuffles_preserve_each_block_count_and_singleton": true,
+  "independent_assignment_replay": "Explicit participant-ID groups; does not call production allocation or assignment functions.",
+  "conditional_assignment_space": 74918844000,
+  "observed_site_results_identical_to_corrected_unrestricted_scenario": true,
+  "raw_inputs_and_beta_matrix_match_original_audit": true,
+  "four_visit_corrections_verified": true,
+  "summary_consistency": {
+    "all_summary_fields_and_shuffle_ids_match": true,
+    "observed_change": 24,
+    "permutations": 9999,
+    "shuffles_ge_observed": 1619,
+    "p_upper": 0.162
+  },
+  "independent_real_data_r_fits": 11,
+  "all_independent_r_counts_match": true,
+  "observed_max_absolute_errors": {
+    "max_abs_effect_error_1": 5.766220834146911e-15,
+    "max_abs_t_error_1": 1.5709655798446e-13,
+    "max_abs_p_error_1": 1.2356782264078e-13,
+    "max_abs_bh_error_1": 9.76996261670138e-15,
+    "max_abs_effect_error_2": 7.219919107015471e-15,
+    "max_abs_t_error_2": 2.74447131687339e-13,
+    "max_abs_p_error_2": 1.89182003396127e-13,
+    "max_abs_bh_error_2": 2.30038210702332e-13
+  },
+  "permutation_count_sha256": "9554bc04b88b8339ce416d36ded5f0d6221043ea02e821e25186a29edfc4077c",
+  "source_sha256": {
+    "permutation.py": "f957604c0dbf1d2ea5dc326269e97a6ded451c2bb3403de1bf6a17ccf1b2302e",
+    "randomization.py": "d8e6fef803ccbb40f8c0c68718485d74d36f202e21b63b5411cc97eb5560f48e",
+    "prepare_randomization.py": "9c898a1f9a3404685b9919d5b854c9ee2a2639c76394000f4866511330386dc9",
+    "audit_limma.R": "a31e7681020244c373517e10fbba60ca52c01c247462eb553beec2b76cd9d00e"
+  }
+}

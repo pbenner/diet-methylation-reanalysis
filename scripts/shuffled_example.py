@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 from scenarios import paths, add_argument, DEFAULT_SCENARIO
 from randomization import allocation, draw_assignment, BLOCK_SCENARIO, BLOCK_FILE
+from run_inputs import validate_run_inputs
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -21,6 +22,7 @@ def run(seed=None, force=False, scenario=DEFAULT_SCENARIO):
     sample_path, folder = paths(ROOT, 'diet_code', scenario)
     out = folder / "shuffled_example"
     metadata = json.loads((folder / "permutation_run.json").read_text())
+    validate_run_inputs(ROOT, metadata, scenario)
     if metadata["group_field"] != "diet_code":
         raise ValueError("The saved run must use numeric diet codes")
     manifest = out / "run.json"
